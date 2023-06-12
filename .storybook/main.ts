@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/nextjs";
+const path = require("path");
 
 const config: StorybookConfig = {
   stories: ["../app/**/*.stories.mdx", "../app/**/*.stories.@(js|jsx|ts|tsx)"],
@@ -26,6 +27,7 @@ const config: StorybookConfig = {
   },
   webpackFinal: (config) => {
     const rules = config?.module?.rules || [];
+    const aliases = config?.resolve?.alias || {};
 
     const imageRule = rules.find((rule) => {
       const test = (rule as { test: RegExp }).test;
@@ -44,6 +46,8 @@ const config: StorybookConfig = {
       resourceQuery: { not: [/url/] },
       use: [{ loader: "@svgr/webpack", options: { svgo: false } }],
     });
+
+    aliases["@/app"] = path.resolve(__dirname, "../app");
 
     return config;
   },

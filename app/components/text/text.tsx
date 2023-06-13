@@ -1,48 +1,33 @@
+import { classes } from "@/app/utils/style";
+
+import styles from "./text.module.css";
+
 interface TextProps {
   className?: string;
-  size?:
-    | "xs"
-    | "sm"
-    | "base"
-    | "lg"
-    | "xl"
-    | "2xl"
-    | "3xl"
-    | "4xl"
-    | "5xl"
-    | "6xl"
-    | "7xl"
-    | "8xl"
-    | "9xl";
+  size?: "s" | "m" | "l" | "xl";
   as?: React.ElementType;
-  align?: "left" | "center" | "right" | "justify" | "start" | "end";
-  weight?:
-    | "thin"
-    | "extalight"
-    | "light"
-    | "normal"
-    | "medium"
-    | "semibold"
-    | "bold"
-    | "extrabold"
-    | "black";
+  align?: "auto" | "start" | "center";
+  weight?: "auto" | "regular" | "medium" | "bold";
   secondary?: boolean;
   children?: React.ReactNode;
 }
 
 export const Text = ({
   children,
-  size = "base",
+  size = "m",
   as: Component = "span",
-  align = "left",
-  weight = "normal",
+  align = "auto",
+  weight = "auto",
   secondary,
   className = "",
   ...rest
 }: TextProps) => {
   return (
     <Component
-      className={`text-${align} text-${size} font-${weight} ${className}`}
+      className={classes(styles.text, className)}
+      data-align={align}
+      data-size={size}
+      data-weight={weight}
       data-secondary={secondary}
       {...rest}
     >

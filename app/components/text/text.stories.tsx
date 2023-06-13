@@ -14,12 +14,20 @@ type Story = StoryObj<typeof Text>;
 export const Size: Story = {
   render: () => (
     <StoryContainer vertical>
-      <Text size="xs">XSmall</Text>
-      <Text size="sm">Small</Text>
-      <Text size="base">Base</Text>
-      <Text size="lg">Large</Text>
       <Text size="xl">XLarge</Text>
-      <Text size="2xl">2XLarge</Text>
+      <Text size="l">Large</Text>
+      <Text size="m">Medium</Text>
+      <Text size="s">Small</Text>
+    </StoryContainer>
+  ),
+};
+
+export const Weight: Story = {
+  render: () => (
+    <StoryContainer vertical>
+      <Text weight="regular">Regular</Text>
+      <Text weight="medium">Medium</Text>
+      <Text weight="bold">Bold</Text>
     </StoryContainer>
   ),
 };
@@ -27,12 +35,8 @@ export const Size: Story = {
 export const Align: Story = {
   render: () => (
     <StoryContainer vertical stretch>
-      <Text align="left">Left</Text>
-      <Text align="center">Center</Text>
-      <Text align="right">Right</Text>
-      <Text align="justify">Justify</Text>
       <Text align="start">Start</Text>
-      <Text align="end">End</Text>
+      <Text align="center">Center</Text>
     </StoryContainer>
   ),
 };

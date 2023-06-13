@@ -69,5 +69,5 @@ export const TransitionContent = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPresent, onExit, safeToRemove, timeout, onExited, show]);
 
-  return <>children(hasEntered && show ? isPresent : false, status)</>;
+  return <>{children(hasEntered && show ? isPresent : false, status)}</>;
 };

@@ -1,34 +1,86 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Muhamad Risman's Portfolio & Blog
 
-## Getting Started
+Personal website showcasing my work, thoughts, and expertise in software engineering. Built with Astro and modern web technologies.
 
-First, run the development server:
+[Live Site](https://realrisman.github.io/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## About Me
+
+I'm a seasoned Software Engineer with over 10 years of experience specializing in full-stack development and microservices architecture. I've worked with companies like Keller Williams Realty and Catch.com.au, building scalable applications and transforming monolithic systems.
+
+### Technical Expertise
+
+- Frontend: React.js, TypeScript, Next.js
+- Backend: Golang, PHP (Laravel, Symfony)
+- Architecture: Microservices, Event-Driven Systems
+- DevOps: Docker, RabbitMQ, Prometheus, Grafana
+
+## 🚀 Project Structure
+
+```text
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── content/
+│   ├── layouts/
+│   └── pages/
+│   └── styles/
+├── astro.config.mjs
+├── README.md
+├── package.json
+└── tsconfig.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- ✅ Clean, professional design
+- ✅ Dark mode support
+- ✅ 100/100 Lighthouse performance
+- ✅ SEO-optimized
+- ✅ Responsive layout
+- ✅ Blog with MDX support
+- ✅ Project portfolio
+- ✅ Technical writing section
+- ✅ RSS Feed support
+- ✅ Sitemap integration
+- ✅ Table of contents
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🧞 Development Commands
 
-## Learn More
+| Command            | Action                                      |
+| ------------------ | ------------------------------------------- |
+| `pnpm install`     | Installs dependencies                       |
+| `pnpm run dev`     | Starts local dev server at `localhost:4321` |
+| `pnpm run build`   | Build production site to `./dist/`          |
+| `pnpm run preview` | Preview build locally                       |
 
-To learn more about Next.js, take a look at the following resources:
+## 📫 Contact & Social
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 📧 Email: real.risman@gmail.com
+- 💻 GitHub: [Your GitHub Profile](https://github.com/realrisman)
+- 🔗 LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/muhamad-risman)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🛠 Built With
 
-## Deploy on Vercel
+- [Astro](https://astro.build) - Static Site Generator
+- [React](https://reactjs.org) - UI Components
+- [Tailwind CSS](https://tailwindcss.com) - Styling
+- [MDX](https://mdxjs.com) - Content Management
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📝 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+MIT License © [Muhamad Risman]
+
+Feel free to use this template for your own portfolio!
+
+---
+
+### 💼 Available for Opportunities
+
+Currently open for:
+
+- Freelance projects
+- Technical collaborations
+- Software architecture consulting
+- Full-stack development roles

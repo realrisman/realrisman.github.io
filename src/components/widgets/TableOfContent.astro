@@ -20,23 +20,41 @@ function buildToc(headings: any) {
 }
 ---
 
-<nav class='toc sticky top-4 py-2 lg:-ml-3'>
-	<h3 class='font-extrabold uppercase mb-1 px-3 text-sm'>On This Page</h3>
-	<ul class='toc-list max-h-[calc(100vh-70px)] overflow-auto text-[.825rem] text-[var(--color-content-secondary)]'>
+<nav class='toc sticky top-4 py-3'>
+	<div class='flex items-center gap-2 mb-2 px-3'>
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width='16'
+			height='16'
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			stroke-width='2'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+			class='text-primary-600 dark:text-primary-400'
+		>
+			<path d='M4 6h16'></path>
+			<path d='M4 12h16'></path>
+			<path d='M4 18h12'></path>
+		</svg>
+		<h3 class='font-bold text-sm text-gray-900 dark:text-gray-100'>Contents</h3>
+	</div>
+	<ul class='toc-list max-h-[calc(100vh-120px)] overflow-auto text-sm text-gray-700 dark:text-gray-300 pr-2'>
 		{
 			toc.map((heading: any) => (
-				<li>
+				<li class='mb-1'>
 					<a
-						class='block font-bold py-1.5 px-3 border-l border-transparent text-inherit leading-tight text-zinc-700 dark:text-zinc-300'
+						class='block font-medium py-1.5 px-3 border-l-2 border-transparent hover:border-primary-300 dark:hover:border-primary-700 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-r-lg transition-all duration-150 leading-tight'
 						href={'#' + heading.slug}>
 						{heading.text}
 					</a>
 					{heading.subheadings?.length > 0 && (
-						<ul>
+						<ul class='mt-0.5 ml-2'>
 							{heading.subheadings.map((subheading: any) => (
-								<li>
+								<li class='mb-0.5'>
 									<a
-										class='block py-1.5 pl-6 pr-3 border-l border-transparent text-inherit leading-tight text-zinc-700 dark:text-zinc-300'
+										class='block py-1 pl-6 pr-3 border-l-2 border-transparent hover:border-primary-300 dark:hover:border-primary-700 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-r-lg transition-all duration-150 leading-tight text-gray-600 dark:text-gray-400 text-[0.9rem]'
 										href={'#' + subheading.slug}>
 										{subheading.text}
 									</a>
@@ -51,7 +69,7 @@ function buildToc(headings: any) {
 </nav>
 <style>
 	.toc-list::-webkit-scrollbar {
-		width: 5px;
+		width: 4px;
 	}
 
 	/* Track */
@@ -61,11 +79,25 @@ function buildToc(headings: any) {
 
 	/* Handle */
 	.toc-list::-webkit-scrollbar-thumb {
-		background: #eeeeee;
-		border-radius: 5px;
+		background: #e0e0e0;
+		border-radius: 4px;
 	}
-  :global(.dark) .toc-list::-webkit-scrollbar-thumb {
-		background: #2e2e2e;
-		border-radius: 5px;
+
+	.toc-list::-webkit-scrollbar-thumb:hover {
+		background: #cccccc;
+	}
+
+	:global(.dark) .toc-list::-webkit-scrollbar-thumb {
+		background: #3e3e3e;
+		border-radius: 4px;
+	}
+
+	:global(.dark) .toc-list::-webkit-scrollbar-thumb:hover {
+		background: #4e4e4e;
+	}
+
+	/* Active link styles */
+	:global(nav.toc a.bg-\[var\(--background-surface-color\)\]) {
+		@apply bg-primary-50 dark:bg-primary-900/20 border-primary-500 dark:border-primary-500 text-primary-700 dark:text-primary-400 font-medium;
 	}
 </style>

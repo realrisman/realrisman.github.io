@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import NotFoundImage from '../assets/img/404-not-found.png';
 ---
 
 <BaseLayout title='404 - Page Not Found' description='The page you are looking for does not exist'>
@@ -9,7 +8,7 @@ import NotFoundImage from '../assets/img/404-not-found.png';
 		<section class='py-16 md:py-24 animate-fade-in'>
 			<div class='max-w-3xl mx-auto text-center'>
 				<div class='mb-8'>
-					<Image src={NotFoundImage} alt='404 - Page Not Found' width={400} height={300} class='mx-auto' />
+					<Image src='/404.png' alt='404 - Page Not Found' width={400} height={300} class='mx-auto' />
 				</div>
 
 				<h1 class='text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-purple-600'>

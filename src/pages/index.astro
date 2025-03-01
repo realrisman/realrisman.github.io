@@ -2,9 +2,7 @@
 import { SITE_TITLE, SITE_TAGLINE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import Ava from '@src/assets/img/ava.jpeg';
 import Prose from '../components/Prose.astro';
 import { projects } from './projects/projects';
 import ProjectList from '../components/ProjectList.astro';
@@ -94,8 +92,8 @@ const posts = (await getCollection('blog'))
 						<div class='absolute inset-0 rounded-3xl bg-gradient-to-r from-primary-400 to-purple-500 blur-xl opacity-20 animate-pulse'>
 						</div>
 						<div class='relative'>
-							<Image
-								src={Ava}
+							<img
+								src='/profile.webp'
 								alt='Muhamad Risman'
 								width={400}
 								loading='eager'

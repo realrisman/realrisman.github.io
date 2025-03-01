@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import Ava from '@src/assets/img/ava.jpeg';
 
 type PicSize = 'sm' | 'md' | 'lg';
 interface Props {
@@ -21,7 +20,7 @@ const { picSize } = Astro.props;
 			{ 'w-[90px] h-[90px]': picSize === 'lg' }
 		]}
 	>
-		<Image src={Ava} alt='Muhamad Risman' />
+		<img src='/profile.webp' alt='Muhamad Risman' width='100%' height='100%' />
 	</a>
 	<div>
 		<div>

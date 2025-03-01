@@ -12,12 +12,20 @@ const { title, description, image } = Astro.props;
 <html lang='en'>
 	<head>
 		<BaseHead title={title} description={description} image={image} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet">
 	</head>
 	<body
-		class="bg-white dark:bg-zinc-900 dark:text-zinc-100 pt-16 sm:pt-0"
+		class="bg-white dark:bg-dark-200 dark:text-zinc-100 font-sans relative pt-16 sm:pt-0 overflow-x-hidden"
 	>
+		<!-- Background gradient elements -->
+		<div class="fixed inset-0 -z-10 h-full w-full bg-white dark:bg-dark-200 dark:bg-grid-white/[0.05] bg-grid-black/[0.02]"></div>
+		<div class="fixed -z-10 h-[300px] w-[300px] rounded-full bg-primary-400/30 dark:bg-primary-600/20 blur-3xl top-[20%] left-[15%] animate-float"></div>
+		<div class="fixed -z-10 h-[250px] w-[250px] rounded-full bg-purple-400/20 dark:bg-purple-600/10 blur-3xl bottom-[20%] right-[15%] animate-float" style="animation-delay: 1s;"></div>
+		
 		<Header/>
-		<div class='py-8 min-h-[calc(100vh-160px)]'>
+		<div class='py-8 min-h-[calc(100vh-160px)] animate-fade-in'>
 			<slot />
 		</div>
 		<Footer />
@@ -39,3 +47,53 @@ const { title, description, image } = Astro.props;
     }
 	</body>
 </html>
+
+<style is:global>
+  /* Grid background pattern */
+  .bg-grid-black {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  }
+  
+  .bg-grid-white {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .dark ::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: #334155;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+</style>

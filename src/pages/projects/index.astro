@@ -2,18 +2,22 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectList from '../../components/ProjectList.astro';
 import { projects } from './projects';
-
 ---
 
-<BaseLayout
-	title="All My Projects"
-	description="All my project portfolio from real projects to open source projects."
->
-  <div class='container'>
-    <div class="mb-10">
-      <h1 class="text-3xl font-bold mb-2">All My Projects</h1>
-      <p class="text-zinc-700 dark:text-zinc-300 text-lg">All my project portfolio from real projects to open source projects.</p>
-    </div>
-    <ProjectList projects={projects}/>
-  </div>
+<BaseLayout title='Projects' description="Muhamad Risman's portfolio of software engineering projects">
+	<div class='container'>
+		<section class='py-16 md:py-24 animate-fade-in'>
+			<div class='text-center mb-12'>
+				<h1 class='text-4xl md:text-5xl font-bold mb-4'>Projects</h1>
+				<p class='text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto'>
+					A showcase of my software engineering work, including web applications, microservices, and open-source contributions.
+				</p>
+				<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto mt-6'></div>
+			</div>
+
+			<div class='max-w-6xl mx-auto'>
+				<ProjectList projects={projects} />
+			</div>
+		</section>
+	</div>
 </BaseLayout>

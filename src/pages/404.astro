@@ -1,19 +1,66 @@
 ---
-import { Image } from 'astro:assets';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import NotFoundImage from '@src/assets/img/404-not-found.png';
+import { Image } from 'astro:assets';
+import NotFoundImage from '../assets/img/404.svg';
 ---
 
-<BaseLayout title={'404 Page Not Found - ' + SITE_TITLE} description={SITE_DESCRIPTION + ' 404 Page Not Found'}>
-	<div class='container text-center'>
-		<Image width={300} class='my-8 mx-auto' src={NotFoundImage} alt='404 Page Not Found' />
-		<div class='p-4'>
-			<h1 class='text-5xl font-bold my-4'>Page Not Found</h1>
-			<p class='text-xl'>
-				The page you're looking for is either moved or no longer exists. <br />
-				Please contact the site owner that linked you to the original URL and let them know their link is broken.
-			</p>
-		</div>
+<BaseLayout title='404 - Page Not Found' description='The page you are looking for does not exist'>
+	<div class='container'>
+		<section class='py-16 md:py-24 animate-fade-in'>
+			<div class='max-w-3xl mx-auto text-center'>
+				<div class='mb-8'>
+					<Image src={NotFoundImage} alt='404 - Page Not Found' width={400} height={300} class='mx-auto' />
+				</div>
+
+				<h1 class='text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-purple-600'>
+					Page Not Found
+				</h1>
+
+				<p class='text-lg text-gray-600 dark:text-gray-400 mb-8'>
+					The page you're looking for has either been moved or no longer exists. If you believe this is a broken link, please contact me.
+				</p>
+
+				<div class='flex flex-col sm:flex-row gap-4 justify-center'>
+					<a
+						href='/'
+						class='inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors'
+					>
+						<svg
+							xmlns='http://www.w3.org/2000/svg'
+							width='20'
+							height='20'
+							viewBox='0 0 24 24'
+							fill='none'
+							stroke='currentColor'
+							stroke-width='2'
+							stroke-linecap='round'
+							stroke-linejoin='round'
+							><path d='m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'></path><polyline points='9 22 9 12 15 12 15 22'></polyline></svg
+						>
+						Back to Home
+					</a>
+
+					<a
+						href='/posts'
+						class='inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white dark:bg-dark-100 border border-gray-200 dark:border-gray-800 hover:border-primary-500 dark:hover:border-primary-500 text-gray-800 dark:text-gray-200 font-medium transition-colors'
+					>
+						<svg
+							xmlns='http://www.w3.org/2000/svg'
+							width='20'
+							height='20'
+							viewBox='0 0 24 24'
+							fill='none'
+							stroke='currentColor'
+							stroke-width='2'
+							stroke-linecap='round'
+							stroke-linejoin='round'
+							><path d='M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2'
+							></path><path d='M18 14h-8'></path><path d='M15 18h-5'></path><path d='M10 6h8v4h-8V6Z'></path></svg
+						>
+						Browse Blog Posts
+					</a>
+				</div>
+			</div>
+		</section>
 	</div>
 </BaseLayout>

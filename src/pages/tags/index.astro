@@ -1,82 +1,79 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
-import BaseLayout from '@src/layouts/BaseLayout.astro';
-import { slugify } from '@src/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { slugify, unslugify } from '../../utils';
 
 type BlogPost = CollectionEntry<'blog'>;
-interface Tag {
-	value: string;
-	label: string;
-	postCount: number;
+
+function groupTagsByFirstLetter(tags: string[]) {
+	return tags.reduce(
+		(acc, tag) => {
+			const firstLetter = tag.charAt(0).toUpperCase();
+			if (!acc[firstLetter]) {
+				acc[firstLetter] = [];
+			}
+			acc[firstLetter].push(tag);
+			return acc;
+		},
+		{} as Record<string, string[]>
+	);
 }
 
-function groupTagsByFirstLetter(tags: Tag[]) {
-  const grouped = tags.reduce((acc, tag) => {
-    const firstLetter = tag.label[0].toUpperCase();
-    if (!acc[firstLetter]) {
-      acc[firstLetter] = [];
-    }
-    acc[firstLetter].push(tag);
-    return acc;
-  }, {} as Record<string, Tag[]>);
+const posts = await getCollection('blog');
+const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))].sort();
+const tagWithCount = tags.map((tag) => {
+	const count = posts.filter((post) => post.data.tags?.includes(tag)).length;
+	return { tag, count };
+});
 
-  return Object.entries(grouped)
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([letter, tags]) => ({
-      letter,
-      tags: tags.sort((a, b) => a.label.localeCompare(b.label)),
-    }));
-}
-
-const allPosts: BlogPost[] = await getCollection('blog');
-const mappedTags: { [key: string]: Tag } = {};
-for (const post of allPosts) {
-	for (const tag of post.data?.tags || []) {
-		const tagValue = slugify(tag);
-		if (mappedTags[tagValue]) {
-			mappedTags[tagValue].postCount += 1;
-		} else {
-			const _tag: Tag = {
-				value: tagValue,
-				label: tag,
-				postCount: 1
-			};
-			mappedTags[tagValue] = _tag;
-		}
-	}
-}
-const groupedTags  = groupTagsByFirstLetter(Object.values(mappedTags))
-const title = `All Tags`;
-const description = 'Post tags: concise keywords categorizing content for easy navigation and improved searchability'
+const groupedTags = groupTagsByFirstLetter(tags);
+const sortedLetters = Object.keys(groupedTags).sort();
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title='Tags' description='Browse all blog post tags'>
 	<div class='container'>
-    <div class="mb-10">
-      <h1 class="text-3xl font-bold mb-2">{title}</h1>
-      <p class="text-zinc-700 dark:text-zinc-300 text-lg">{description}</p>
-    </div>
-    <div>
-      {groupedTags.map(({ letter, tags }) => (
-        <div class="flex gap-2 border-b dark:border-b-zinc-700 py-3 mb-5 capitalize">
-          <h2 class="text-2xl font-bold text-zinc-800 dark:text-zinc-200 w-7 shrink-0">{letter}</h2>
-          <div class='flex gap-2 flex-wrap'>
-            {
-              (tags || [] )?.map((tag: Tag) => (
-                <a
-                  class='border border-zinc-300 dark:border-zinc-700 rounded-2xl
-                    text-sm text-zinc-700 dark:text-zinc-300 no-underline px-3 py-1
-                    transition-all duration-700
-                  hover:border-zinc-700 dark:hover:border-zinc-300'
-                  href={`/tags/${slugify(tag.value)}/`}>
-                  {tag.label} ({tag.postCount})
-                </a>
-              ))
-            }
-          </div>
-        </div>
-      ))}
-    </div>
+		<section class='py-16 md:py-24 animate-fade-in'>
+			<div class='text-center mb-12'>
+				<h1 class='text-4xl md:text-5xl font-bold mb-4'>Tags</h1>
+				<p class='text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto'>Browse all topics covered in the blog</p>
+				<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto mt-6'></div>
+			</div>
+
+			<div class='max-w-4xl mx-auto'>
+				<div class='bg-white dark:bg-dark-100 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-8'>
+					{
+						sortedLetters.map((letter) => (
+							<div class='mb-8 last:mb-0'>
+								<div class='flex items-center gap-3 mb-4'>
+									<div class='flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 font-bold text-lg'>
+										{letter}
+									</div>
+									<div class='h-px flex-grow bg-gray-200 dark:bg-gray-700' />
+								</div>
+
+								<div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3'>
+									{groupedTags[letter].map((tag) => {
+										const count = tagWithCount.find((t) => t.tag === tag)?.count || 0;
+										return (
+											<a
+												href={`/tags/${slugify(tag)}/`}
+												class='flex items-center justify-between p-3 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-primary-500 dark:hover:border-primary-500 bg-gray-50 dark:bg-dark-200 hover:bg-primary-50 dark:hover:bg-primary-900/10 transition-colors group'>
+												<span class='font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors'>
+													{unslugify(tag)}
+												</span>
+												<span class='px-2 py-1 text-xs font-medium rounded-full bg-gray-200 dark:bg-dark-300 text-gray-700 dark:text-gray-300 group-hover:bg-primary-200 dark:group-hover:bg-primary-900/30 group-hover:text-primary-800 dark:group-hover:text-primary-300 transition-colors'>
+													{count}
+												</span>
+											</a>
+										);
+									})}
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
 	</div>
 </BaseLayout>

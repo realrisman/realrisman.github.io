@@ -20,74 +20,242 @@ const posts = (await getCollection('blog'))
 
 <BaseLayout title={SITE_TITLE + ' - ' + SITE_TAGLINE} description={SITE_DESCRIPTION}>
 	<div class='container'>
-		<div class='w-full md:flex md:items-center gap-16 mb-10'>
-			<div class='text-pretty leading-9'>
-				<h1 class='text-4xl font-bold mb-4 flex items-center gap-2'>
-					Hi There
-					<img
-						src='https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif'
-						width='40'
-						height='40'
-						alt='waving hand'
-						class='inline-block'
-						loading='lazy'
-					/>
-				</h1>
+		<!-- Hero Section -->
+		<section class='min-h-[80vh] flex flex-col justify-center py-16 md:py-24'>
+			<div class='grid grid-cols-1 md:grid-cols-12 gap-12 items-center'>
+				<div class='md:col-span-7 space-y-6'>
+					<div
+						class='inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium mb-2'
+					>
+						Full Stack Software Engineer
+					</div>
+					<h1 class='text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
+						Hi, I'm <span
+							class='bg-gradient-to-r from-primary-600 to-purple-600 dark:from-primary-400 dark:to-purple-400 text-transparent bg-clip-text'
+							>Muhamad Risman</span
+						>
+						<span class='inline-block animate-float'>
+							<img
+								src='https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif'
+								width='40'
+								height='40'
+								alt='waving hand'
+								class='inline-block'
+								loading='lazy'
+							/>
+						</span>
+					</h1>
+					<p class='text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl'>
+						A seasoned developer with over 10 years of experience crafting robust web applications and scalable systems.
+					</p>
+
+					<div class='flex flex-wrap gap-3 pt-2'>
+						<a
+							href='/projects'
+							class='inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors'
+						>
+							View My Work
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								width='18'
+								height='18'
+								viewBox='0 0 24 24'
+								fill='none'
+								stroke='currentColor'
+								stroke-width='2'
+								stroke-linecap='round'
+								stroke-linejoin='round'><path d='M5 12h14'></path><path d='m12 5 7 7-7 7'></path></svg
+							>
+						</a>
+						<a
+							href='/about'
+							class='inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-dark-100 dark:hover:bg-dark-100/80 text-gray-800 dark:text-gray-200 font-medium transition-colors'
+						>
+							About Me
+						</a>
+					</div>
+
+					<div class='pt-6'>
+						<div class='flex flex-wrap gap-4 items-center'>
+							<div class='text-gray-500 dark:text-gray-400 font-medium'>Tech Stack:</div>
+							<div class='flex flex-wrap gap-3'>
+								<span class='px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-100 text-gray-800 dark:text-gray-200 text-sm'>React</span>
+								<span class='px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-100 text-gray-800 dark:text-gray-200 text-sm'>TypeScript</span>
+								<span class='px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-100 text-gray-800 dark:text-gray-200 text-sm'>Next.js</span>
+								<span class='px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-100 text-gray-800 dark:text-gray-200 text-sm'>Golang</span>
+								<span class='px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-100 text-gray-800 dark:text-gray-200 text-sm'>PHP</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class='md:col-span-5 flex justify-center md:justify-end'>
+					<div class='relative'>
+						<div class='absolute inset-0 rounded-3xl bg-gradient-to-r from-primary-400 to-purple-500 blur-xl opacity-20 animate-pulse'>
+						</div>
+						<div class='relative'>
+							<Image
+								src={Ava}
+								alt='Muhamad Risman'
+								width={400}
+								loading='eager'
+								class='rounded-3xl rotate-3 shadow-xl border-4 border-white dark:border-dark-100 z-10'
+							/>
+							<div class='absolute -bottom-4 -right-4 bg-white dark:bg-dark-100 rounded-full p-3 shadow-lg'>
+								<svg
+									xmlns='http://www.w3.org/2000/svg'
+									width='24'
+									height='24'
+									viewBox='0 0 24 24'
+									fill='none'
+									stroke='currentColor'
+									stroke-width='2'
+									stroke-linecap='round'
+									stroke-linejoin='round'
+									class='text-primary-600 dark:text-primary-400'
+									><path
+										d='m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z'
+									></path></svg
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- About Section -->
+		<section class='py-16 md:py-24'>
+			<div class='max-w-3xl mx-auto'>
+				<div class='text-center mb-12'>
+					<h2 class='text-3xl font-bold mb-4'>About Me</h2>
+					<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto'></div>
+				</div>
+
 				<Prose>
-					<div class='text-justify max-w-prose mx-auto'>
-						<p class='mb-4'>
-							I'm Muhamad Risman, a seasoned Software Engineer with over 10 years of experience crafting robust web applications.
-							Specializing in full-stack development and microservices architecture, I've helped companies like Keller Williams Realty and
-							Catch.com.au transform their systems and scale their operations.
+					<div class='text-gray-600 dark:text-gray-300 space-y-4'>
+						<p>
+							I'm a seasoned Software Engineer with over 10 years of experience crafting robust web applications. Specializing in full-stack
+							development and microservices architecture, I've helped companies like Keller Williams Realty and Catch.com.au transform their
+							systems and scale their operations.
 						</p>
 
-						<p class='mb-4'>
+						<p>
 							🚀 My expertise includes building scalable applications with React.js, TypeScript, and Next.js, developing robust backend
 							systems using Golang and PHP, and designing microservices architectures. I'm passionate about clean code, performance
 							optimization, and creating exceptional user experiences.
 						</p>
 
-						<ul class='space-y-2'>
-							<li class='flex items-center'>
-								<span class='mr-2'>💼</span>
-								<span>
-									Open for exciting opportunities! Reach me at
-									<a href='mailto:real.risman@gmail.com' class='text-blue-600 hover:text-blue-800 underline'> my email</a>
-								</span>
-							</li>
-							<li class='flex items-center'>
-								<span class='mr-2'>💻</span>
-								<span>Currently available for freelance projects and collaborations</span>
-							</li>
-							<li class='flex items-center'>
-								<span class='mr-2'>💬</span>
-								<span>Feel free to reach out for technical discussions or potential projects</span>
-							</li>
-						</ul>
+						<div class='bg-gray-50 dark:bg-dark-100 p-6 rounded-xl mt-6 shadow-sm'>
+							<ul class='space-y-4'>
+								<li class='flex items-start'>
+									<span class='mr-3 text-xl'>💼</span>
+									<span>
+										Open for exciting opportunities! Reach me at
+										<a href='mailto:real.risman@gmail.com' class='text-primary-600 dark:text-primary-400 hover:underline font-medium'
+											>real.risman@gmail.com</a
+										>
+									</span>
+								</li>
+								<li class='flex items-start'>
+									<span class='mr-3 text-xl'>💻</span>
+									<span>Currently available for freelance projects and collaborations</span>
+								</li>
+								<li class='flex items-start'>
+									<span class='mr-3 text-xl'>💬</span>
+									<span>Feel free to reach out for technical discussions or potential projects</span>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</Prose>
-			</div>
-			<Image src={Ava} alt='Muhamad Risman' width={300} loading='eager' class='rounded-3xl rotate-3 mx-4 md:mx-0' />
-		</div>
-		<main>
-			<div class='mt-6 mb-12'>
-				<div class='flex justify-between gap-2 border-b mb-1 dark:border-b-zinc-700'>
-					<h2 class='text-lg font-bold mb-3'>Recent Posts</h2>
-					<a href='/posts/' class='inline-block py-2 underline dark:prose-invert'>All posts &raquo;</a>
+
+				<div class='mt-8 text-center'>
+					<a href='/about' class='inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:underline font-medium'>
+						Learn more about me
+						<svg
+							xmlns='http://www.w3.org/2000/svg'
+							width='18'
+							height='18'
+							viewBox='0 0 24 24'
+							fill='none'
+							stroke='currentColor'
+							stroke-width='2'
+							stroke-linecap='round'
+							stroke-linejoin='round'><path d='M5 12h14'></path><path d='m12 5 7 7-7 7'></path></svg
+						>
+					</a>
 				</div>
-				<div>
-					{posts.length === 0 && <p>No posts yet.</p>}
-					{posts.map((post: BlogPost) => <PostItem post={post} />)}
-				</div>
-				<div class='text-right'></div>
 			</div>
-			<div>
-				<div class='flex justify-between gap-2 mb-1'>
-					<h2 class='text-lg font-bold mb-3'>My Projects</h2>
-					<a href='/projects/' class='inline-block py-2 underline dark:prose-invert'>All projects &raquo;</a>
-				</div>
-				<ProjectList projects={top6Projects} />
+		</section>
+
+		<!-- Projects Section -->
+		<section class='py-16 md:py-24'>
+			<div class='text-center mb-12'>
+				<h2 class='text-3xl font-bold mb-4'>Featured Projects</h2>
+				<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto'></div>
+				<p class='text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto'>
+					Check out some of my recent work and open-source contributions.
+				</p>
 			</div>
-		</main>
+
+			<ProjectList projects={top6Projects} />
+
+			<div class='mt-10 text-center'>
+				<a
+					href='/projects'
+					class='inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-dark-100 dark:hover:bg-dark-100/80 text-gray-800 dark:text-gray-200 font-medium transition-colors'
+				>
+					View All Projects
+					<svg
+						xmlns='http://www.w3.org/2000/svg'
+						width='18'
+						height='18'
+						viewBox='0 0 24 24'
+						fill='none'
+						stroke='currentColor'
+						stroke-width='2'
+						stroke-linecap='round'
+						stroke-linejoin='round'><path d='M5 12h14'></path><path d='m12 5 7 7-7 7'></path></svg
+					>
+				</a>
+			</div>
+		</section>
+
+		<!-- Blog Section -->
+		<section class='py-16 md:py-24'>
+			<div class='text-center mb-12'>
+				<h2 class='text-3xl font-bold mb-4'>Latest Posts</h2>
+				<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto'></div>
+				<p class='text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto'>
+					Thoughts, tutorials, and insights about software development and technology.
+				</p>
+			</div>
+
+			<div class='max-w-3xl mx-auto'>
+				{posts.length === 0 && <p class='text-center text-gray-500 dark:text-gray-400'>No posts yet. Check back soon!</p>}
+				{posts.map((post: BlogPost) => <PostItem post={post} />)}
+			</div>
+
+			<div class='mt-10 text-center'>
+				<a
+					href='/posts'
+					class='inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-dark-100 dark:hover:bg-dark-100/80 text-gray-800 dark:text-gray-200 font-medium transition-colors'
+				>
+					View All Posts
+					<svg
+						xmlns='http://www.w3.org/2000/svg'
+						width='18'
+						height='18'
+						viewBox='0 0 24 24'
+						fill='none'
+						stroke='currentColor'
+						stroke-width='2'
+						stroke-linecap='round'
+						stroke-linejoin='round'><path d='M5 12h14'></path><path d='m12 5 7 7-7 7'></path></svg
+					>
+				</a>
+			</div>
+		</section>
 	</div>
 </BaseLayout>

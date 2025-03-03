@@ -67,6 +67,70 @@ function buildToc(headings: any) {
 		}
 	</ul>
 </nav>
+
+<script>
+	// Function to update active TOC item based on scroll position
+	function updateTOC() {
+		// Get all headings in the document
+		const headings = Array.from(document.querySelectorAll('h2, h3, h4, h5, h6')) as HTMLHeadingElement[];
+
+		// Get all TOC links
+		const tocLinks = Array.from(document.querySelectorAll('.toc-list a')) as HTMLAnchorElement[];
+
+		if (headings.length === 0 || tocLinks.length === 0) return;
+
+		// Find the heading that is currently in view
+		let currentHeadingIndex = 0;
+		const scrollPosition = window.scrollY + 100; // Add offset to improve accuracy
+
+		for (let i = 0; i < headings.length; i++) {
+			if (headings[i].offsetTop <= scrollPosition) {
+				currentHeadingIndex = i;
+			} else {
+				break;
+			}
+		}
+
+		// Remove active class from all TOC links
+		tocLinks.forEach((link) => {
+			link.classList.remove(
+				'bg-primary-50',
+				'dark:bg-primary-900/20',
+				'border-primary-500',
+				'dark:border-primary-500',
+				'text-primary-700',
+				'dark:text-primary-400',
+				'font-medium'
+			);
+		});
+
+		// Add active class to the current TOC link
+		const currentHeading = headings[currentHeadingIndex];
+		if (currentHeading) {
+			const currentHeadingId = currentHeading.id;
+			const correspondingLink = tocLinks.find((link) => link.getAttribute('href') === `#${currentHeadingId}`);
+
+			if (correspondingLink) {
+				correspondingLink.classList.add(
+					'bg-primary-50',
+					'dark:bg-primary-900/20',
+					'border-primary-500',
+					'dark:border-primary-500',
+					'text-primary-700',
+					'dark:text-primary-400',
+					'font-medium'
+				);
+			}
+		}
+	}
+
+	// Update TOC on page load
+	document.addEventListener('DOMContentLoaded', updateTOC);
+
+	// Update TOC on scroll
+	window.addEventListener('scroll', updateTOC);
+</script>
+
 <style>
 	.toc-list::-webkit-scrollbar {
 		width: 4px;
@@ -96,8 +160,8 @@ function buildToc(headings: any) {
 		background: #4e4e4e;
 	}
 
-	/* Active link styles */
-	:global(nav.toc a.bg-\[var\(--background-surface-color\)\]) {
+	/* We don't need this anymore as we're handling active state with JavaScript */
+	/* :global(nav.toc a.bg-\[var\(--background-surface-color\)\]) {
 		@apply bg-primary-50 dark:bg-primary-900/20 border-primary-500 dark:border-primary-500 text-primary-700 dark:text-primary-400 font-medium;
-	}
+	} */
 </style>

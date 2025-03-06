@@ -27,24 +27,26 @@ const menu = [
 <header
 	id='site-header'
 	class:list={[
-		'fixed top-0 left-0 right-0 flex items-center w-full transition-all duration-300 z-[1001] backdrop-blur-md bg-white/80 dark:bg-dark-200/80 border-b border-gray-200 dark:border-gray-800'
+		'fixed top-0 left-0 right-0 flex items-center w-full transition-all duration-300 z-[1001] backdrop-blur-md bg-white/80 dark:bg-dark-200/80 border-b border-gray-200/50 dark:border-gray-800/50'
 	]}
 >
 	<div class='container'>
 		<nav class='flex gap-4 items-center justify-between py-3'>
 			<h2 class='m-0'>
-				<a href='/' class='flex gap-3 items-center text-xl font-black'>
+				<a href='/' class='group flex gap-3 items-center text-xl font-black'>
 					<div class='relative'>
-						<div class='absolute inset-0 rounded-full bg-gradient-to-r from-primary-400 to-purple-500 blur-[2px] opacity-70 animate-pulse'>
+						<div
+							class='absolute inset-0 rounded-full bg-gradient-to-r from-primary-400 to-purple-500 blur-[2px] opacity-70 animate-pulse group-hover:opacity-100 transition-opacity'
+						>
 						</div>
 						<img
 							src='/profile-zoomed.webp'
 							alt='Muhamad Risman'
-							class='relative rounded-full w-10 h-10 border-2 border-white dark:border-dark-100 shadow-lg object-cover'
+							class='relative rounded-full w-10 h-10 border-2 border-white dark:border-dark-100 shadow-lg object-cover group-hover:scale-105 transition-transform'
 						/>
 					</div>
 					<span
-						class='bg-gradient-to-r from-primary-600 to-purple-600 dark:from-primary-400 dark:to-purple-400 text-transparent bg-clip-text font-bold'
+						class='bg-gradient-to-r from-primary-600 to-purple-600 dark:from-primary-400 dark:to-purple-400 text-transparent bg-clip-text font-bold group-hover:opacity-80 transition-opacity'
 						>Risman</span
 					>
 				</a>
@@ -55,9 +57,10 @@ const menu = [
 				{
 					menu.map((item) => (
 						<HeaderLink
-							class='px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-dark-100'
+							class='relative px-3 py-2 rounded-md text-sm font-medium transition-all hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 group'
 							href={item.link}>
 							{item.label}
+							<span class='absolute bottom-1 left-3 right-3 h-px bg-primary-500 dark:bg-primary-400 transform scale-x-0 transition-transform group-hover:scale-x-100' />
 						</HeaderLink>
 					))
 				}
@@ -65,17 +68,17 @@ const menu = [
 
 			<div class='flex items-center gap-2'>
 				<a
-					class='p-2 rounded-full hover:bg-gray-100 dark:hover:bg-dark-100 transition-colors dark:hidden'
+					class='p-2 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all hover:text-primary-600 dark:hover:text-primary-400 dark:hidden'
 					href='https://github.com/realrisman'
 					target='_blank'><Image src={GithubBlack} width={22} height={22} alt='Github logo' /></a
 				>
 				<a
-					class='p-2 rounded-full hover:bg-gray-100 dark:hover:bg-dark-100 transition-colors hidden dark:block'
+					class='p-2 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all hover:text-primary-600 dark:hover:text-primary-400 hidden dark:block'
 					href='https://github.com/realrisman'
 					target='_blank'><Image src={GithubWhite} width={22} height={22} alt='Github logo' /></a
 				>
 				<button
-					class='p-2 rounded-full hover:bg-gray-100 dark:hover:bg-dark-100 transition-colors'
+					class='p-2 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all hover:text-primary-600 dark:hover:text-primary-400'
 					id='themeToggle'
 					aria-label='Theme mode'
 				>
@@ -113,7 +116,7 @@ const menu = [
 				<!-- Mobile menu button -->
 				<button
 					id='mobile-menu-button'
-					class='md:hidden p-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-100 transition-colors border border-gray-200 dark:border-gray-800'
+					class='md:hidden p-2.5 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all hover:text-primary-600 dark:hover:text-primary-400 border border-gray-200/50 dark:border-gray-800/50'
 					aria-label='Toggle menu'
 				>
 					<svg
@@ -153,25 +156,40 @@ const menu = [
 	</div>
 
 	<!-- Mobile Navigation Menu -->
-	<div id='mobile-menu' class='fixed inset-0 top-0 z-[1000] bg-white dark:bg-dark-200 hidden min-h-screen'>
+	<div id='mobile-menu' class='fixed inset-0 top-0 z-[1000] bg-white/95 dark:bg-dark-200/95 backdrop-blur-lg hidden min-h-screen'>
 		<nav class='container h-screen flex flex-col justify-center'>
 			<ul class='space-y-3 -mt-16'>
 				{
-					menu.map((item) => (
-						<li>
-							<a
-								href={item.link}
-								class='block py-4 px-6 text-xl font-medium text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-100 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200 rounded-xl'>
-								{item.label}
-							</a>
-						</li>
-					))
+					menu.map((item) => {
+						const isActive = Astro.url.pathname === item.link || Astro.url.pathname === '/' + item.link.split('/')[1];
+						return (
+							<li>
+								<a
+									href={item.link}
+									class:list={[
+										'group block py-4 px-6 text-xl font-medium transition-all duration-200 rounded-xl',
+										{
+											'text-primary-600 dark:text-primary-400 bg-primary-50/50 dark:bg-primary-900/30': isActive,
+											'text-gray-800 dark:text-gray-200 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400':
+												!isActive
+										}
+									]}>
+									<span class='relative'>
+										{item.label}
+										{!isActive && (
+											<span class='absolute bottom-0 left-0 right-0 h-px bg-primary-500 dark:bg-primary-400 transform scale-x-0 transition-transform group-hover:scale-x-100' />
+										)}
+									</span>
+								</a>
+							</li>
+						);
+					})
 				}
 				<li class='pt-6'>
 					<div class='h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent'></div>
 					<a
 						href='mailto:real.risman@gmail.com'
-						class='mt-6 block py-4 px-6 text-xl font-medium text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900 transition-all duration-200 rounded-xl'
+						class='group mt-6 block py-4 px-6 text-xl font-medium text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-200 rounded-xl'
 					>
 						<div class='flex items-center gap-3'>
 							<svg
@@ -184,6 +202,7 @@ const menu = [
 								stroke-width='2'
 								stroke-linecap='round'
 								stroke-linejoin='round'
+								class='transition-transform group-hover:scale-110'
 							>
 								<path d='M5 7.2A2.2 2.2 0 0 1 7.2 5h9.6A2.2 2.2 0 0 1 19 7.2v9.6a2.2 2.2 0 0 1-2.2 2.2H7.2A2.2 2.2 0 0 1 5 16.8V7.2Z'
 								></path>
@@ -206,6 +225,32 @@ const menu = [
 		}
 		.dark #themeToggle .moon {
 			display: block;
+		}
+
+		/* Add smooth animation for mobile menu */
+		#mobile-menu {
+			transition: opacity 0.3s ease-in-out;
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		#mobile-menu:not(.hidden) {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		/* Add hover animation for header links */
+		@keyframes linkHover {
+			0% {
+				width: 0;
+				left: 50%;
+				right: 50%;
+			}
+			100% {
+				width: 100%;
+				left: 0;
+				right: 0;
+			}
 		}
 	</style>
 
@@ -256,7 +301,7 @@ const menu = [
 		};
 		document.getElementById('themeToggle')?.addEventListener('click', handleToggleClick);
 
-		// Mobile menu toggle
+		// Mobile menu toggle with smooth animation
 		document.addEventListener('DOMContentLoaded', () => {
 			const mobileMenuButton = document.getElementById('mobile-menu-button');
 			const mobileMenu = document.getElementById('mobile-menu');

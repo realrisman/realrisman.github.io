@@ -27,7 +27,7 @@ const menu = [
 <header
 	id='site-header'
 	class:list={[
-		'fixed top-0 left-0 right-0 flex items-center w-full transition-all duration-300 z-[999] backdrop-blur-md bg-white/80 dark:bg-dark-200/80 border-b border-gray-200 dark:border-gray-800'
+		'fixed top-0 left-0 right-0 flex items-center w-full transition-all duration-300 z-[1001] backdrop-blur-md bg-white/80 dark:bg-dark-200/80 border-b border-gray-200 dark:border-gray-800'
 	]}
 >
 	<div class='container'>
@@ -111,18 +111,22 @@ const menu = [
 				</button>
 
 				<!-- Mobile menu button -->
-				<button id='mobile-menu-button' class='md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-dark-100 transition-colors'>
+				<button
+					id='mobile-menu-button'
+					class='md:hidden p-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-100 transition-colors border border-gray-200 dark:border-gray-800'
+					aria-label='Toggle menu'
+				>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
-						width='22'
-						height='22'
+						width='20'
+						height='20'
 						viewBox='0 0 24 24'
 						fill='none'
 						stroke='currentColor'
 						stroke-width='2'
 						stroke-linecap='round'
 						stroke-linejoin='round'
-						class='menu-icon'
+						class='menu-icon text-gray-700 dark:text-gray-300'
 					>
 						<line x1='4' x2='20' y1='12' y2='12'></line>
 						<line x1='4' x2='20' y1='6' y2='6'></line>
@@ -130,15 +134,15 @@ const menu = [
 					</svg>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
-						width='22'
-						height='22'
+						width='20'
+						height='20'
 						viewBox='0 0 24 24'
 						fill='none'
 						stroke='currentColor'
 						stroke-width='2'
 						stroke-linecap='round'
 						stroke-linejoin='round'
-						class='close-icon hidden'
+						class='close-icon hidden text-gray-700 dark:text-gray-300'
 					>
 						<path d='M18 6 6 18'></path>
 						<path d='m6 6 12 12'></path>
@@ -149,21 +153,44 @@ const menu = [
 	</div>
 
 	<!-- Mobile Navigation Menu -->
-	<div id='mobile-menu' class='fixed inset-0 z-[998] bg-white/95 dark:bg-dark-200/95 backdrop-blur-md hidden pt-20'>
-		<nav class='container py-5'>
-			<ul class='space-y-4'>
+	<div id='mobile-menu' class='fixed inset-0 top-0 z-[1000] bg-white dark:bg-dark-200 hidden min-h-screen'>
+		<nav class='container h-screen flex flex-col justify-center'>
+			<ul class='space-y-3 -mt-16'>
 				{
 					menu.map((item) => (
 						<li>
-							<a href={item.link} class='block py-3 px-4 text-lg font-medium border-b border-gray-100 dark:border-gray-800'>
+							<a
+								href={item.link}
+								class='block py-4 px-6 text-xl font-medium text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-100 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200 rounded-xl'>
 								{item.label}
 							</a>
 						</li>
 					))
 				}
-				<li class='pt-4'>
-					<a href='mailto:real.risman@gmail.com' class='block py-3 px-4 text-lg font-medium text-primary-600 dark:text-primary-400'>
-						Contact Me
+				<li class='pt-6'>
+					<div class='h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent'></div>
+					<a
+						href='mailto:real.risman@gmail.com'
+						class='mt-6 block py-4 px-6 text-xl font-medium text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900 transition-all duration-200 rounded-xl'
+					>
+						<div class='flex items-center gap-3'>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								width='20'
+								height='20'
+								viewBox='0 0 24 24'
+								fill='none'
+								stroke='currentColor'
+								stroke-width='2'
+								stroke-linecap='round'
+								stroke-linejoin='round'
+							>
+								<path d='M5 7.2A2.2 2.2 0 0 1 7.2 5h9.6A2.2 2.2 0 0 1 19 7.2v9.6a2.2 2.2 0 0 1-2.2 2.2H7.2A2.2 2.2 0 0 1 5 16.8V7.2Z'
+								></path>
+								<path d='m5 7 7 7 7-7'></path>
+							</svg>
+							Contact Me
+						</div>
 					</a>
 				</li>
 			</ul>

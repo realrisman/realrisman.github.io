@@ -8,172 +8,202 @@ import GithubBlack from '@src/assets/svgs/github-mark.svg';
 const { projects } = Astro.props;
 ---
 
-<div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-	{projects.length === 0 && <p class='col-span-full text-center text-gray-500 dark:text-gray-400'>No projects yet.</p>}
+<div class='space-y-6'>
+	{projects.length === 0 && <p class='text-center text-gray-500 dark:text-gray-400'>No projects yet.</p>}
 	{
 		projects.map((project: Project) => (
-			<div class='group relative overflow-hidden rounded-xl bg-white dark:bg-dark-100 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full'>
-				<div class='absolute inset-0 bg-gradient-to-r from-primary-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
+			<article class='group bg-white dark:bg-dark-100 border-l-4 border-primary-500 dark:border-primary-400 hover:border-purple-500 dark:hover:border-purple-400 shadow-sm hover:shadow-lg transition-all duration-300'>
+				<div class='p-6'>
+					<div class='flex flex-col md:flex-row md:items-start gap-6'>
+						{/* Project Info */}
+						<div class='flex-grow space-y-4'>
+							{/* Header */}
+							<div class='flex flex-wrap items-start justify-between gap-4'>
+								<div>
+									<h3 class='text-xl font-bold mb-2'>
+										<a
+											href={project.demoLink}
+											target='_blank'
+											rel={project.demoLinkRel}
+											class='text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300'>
+											{project.name}
+										</a>
+									</h3>
+									<p class='text-gray-600 dark:text-gray-300'>{project.description}</p>
+								</div>
 
-				<div class='p-6 flex-1 flex flex-col'>
-					<div class='flex justify-between items-center mb-4'>
-						<div class='flex flex-wrap gap-2'>
-							{(project.tags || [])?.slice(0, 2).map((tag: string) => (
-								<span class='px-2.5 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-dark-200 text-gray-700 dark:text-gray-300'>
-									{tag}
-								</span>
-							))}
-							{(project.tags || [])?.length > 2 && (
-								<span class='px-2.5 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-dark-200 text-gray-700 dark:text-gray-300'>
-									+{(project.tags || []).length - 2}
-								</span>
-							)}
-						</div>
-
-						{project.stargazers_count !== undefined && (
-							<div class='shrink-0'>
-								<a
-									href={project.html_url}
-									target='_blank'
-									class='flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-dark-200 dark:hover:bg-dark-200/80 text-gray-700 dark:text-gray-300 transition-colors'>
-									<Image src={GithubBlack} height={12} class='dark:hidden' alt='Github stars' />
-									<Image src={GithubWhite} height={12} class='hidden dark:block' alt='Github stars' />
-									{kFormatter(project.stargazers_count)}
-								</a>
+								{/* GitHub Stars */}
+								{project.stargazers_count !== undefined && (
+									<a
+										href={project.html_url}
+										target='_blank'
+										rel='noopener noreferrer'
+										class='flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-dark-200 dark:hover:bg-dark-200/80 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors duration-300'>
+										<Image src={GithubBlack} height={14} class='dark:hidden' alt='Github stars' />
+										<Image src={GithubWhite} height={14} class='hidden dark:block' alt='Github stars' />
+										{kFormatter(project.stargazers_count)}
+									</a>
+								)}
 							</div>
-						)}
-					</div>
 
-					<h3 class='text-lg font-bold mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors'>
-						<a href={project.demoLink} target='_blank' rel={project.demoLinkRel} class='hover:underline'>
-							{project.name}
-						</a>
-					</h3>
-
-					<p class='text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 flex-grow'>{project.description}</p>
-
-					{project.contributions && (
-						<div class='mb-4'>
-							<h4 class='text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2'>Key Contributions:</h4>
-							<ul class='list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1'>
-								{project.contributions.map((contribution) => (
-									<li>{contribution}</li>
+							{/* Tags */}
+							<div class='flex flex-wrap gap-2'>
+								{(project.tags || [])?.map((tag: string) => (
+									<span class='px-3 py-1 text-sm font-medium rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 border border-primary-100 dark:border-primary-800'>
+										{tag}
+									</span>
 								))}
-							</ul>
+							</div>
+
+							{/* Key Contributions */}
+							{project.contributions && (
+								<div class='mt-4'>
+									<h4 class='text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2'>Key Contributions:</h4>
+									<ul class='grid grid-cols-1 md:grid-cols-2 gap-2'>
+										{project.contributions.map((contribution) => (
+											<li class='flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400'>
+												<svg
+													xmlns='http://www.w3.org/2000/svg'
+													width='16'
+													height='16'
+													viewBox='0 0 24 24'
+													fill='none'
+													stroke='currentColor'
+													stroke-width='2'
+													stroke-linecap='round'
+													stroke-linejoin='round'
+													class='mt-1 text-primary-500 dark:text-primary-400 shrink-0'>
+													<polyline points='20 6 9 17 4 12' />
+												</svg>
+												<span>{contribution}</span>
+											</li>
+										))}
+									</ul>
+								</div>
+							)}
+
+							{/* Action Links */}
+							<div class='flex md:flex-col gap-2 flex-wrap md:min-w-[140px]'>
+								{project.demoLink && (
+									<a
+										href={project.demoLink}
+										target='_blank'
+										rel={project.demoLinkRel}
+										class='flex items-center justify-center gap-2 px-4 py-2 w-full rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary-600/20 dark:hover:shadow-primary-900/30'>
+										<span>View Project</span>
+										<svg
+											xmlns='http://www.w3.org/2000/svg'
+											width='14'
+											height='14'
+											viewBox='0 0 24 24'
+											fill='none'
+											stroke='currentColor'
+											stroke-width='2.5'
+											stroke-linecap='round'
+											stroke-linejoin='round'
+											class='group-hover:translate-x-0.5 transition-transform'>
+											<path d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6' />
+											<polyline points='15 3 21 3 21 9' />
+											<line x1='10' y1='14' x2='21' y2='3' />
+										</svg>
+									</a>
+								)}
+
+								<div class='flex gap-2 w-full'>
+									{project.postLink && (
+										<a
+											href={project.postLink}
+											target='_blank'
+											rel='noopener noreferrer'
+											class='flex items-center justify-center gap-1.5 px-3 py-1.5 flex-1 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-dark-200/50 text-gray-700 dark:text-gray-300 text-sm font-medium transition-all duration-300 hover:scale-[1.02]'>
+											<svg
+												xmlns='http://www.w3.org/2000/svg'
+												width='14'
+												height='14'
+												viewBox='0 0 24 24'
+												fill='none'
+												stroke='currentColor'
+												stroke-width='2'
+												stroke-linecap='round'
+												stroke-linejoin='round'
+												class='shrink-0'>
+												<path d='M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2' />
+												<path d='M18 14h-8' />
+												<path d='M15 18h-5' />
+												<path d='M10 6h8v4h-8V6Z' />
+											</svg>
+											<span>Article</span>
+										</a>
+									)}
+
+									{project.pullRequests && project.pullRequests.length > 0 && (
+										<a
+											href={project.pullRequests}
+											target='_blank'
+											rel='noopener noreferrer'
+											class='flex items-center justify-center gap-1.5 px-3 py-1.5 flex-1 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-dark-200/50 text-gray-700 dark:text-gray-300 text-sm font-medium transition-all duration-300 hover:scale-[1.02]'>
+											<svg
+												xmlns='http://www.w3.org/2000/svg'
+												width='14'
+												height='14'
+												viewBox='0 0 24 24'
+												fill='none'
+												stroke='currentColor'
+												stroke-width='2'
+												stroke-linecap='round'
+												stroke-linejoin='round'
+												class='shrink-0'>
+												<circle cx='18' cy='18' r='3' />
+												<circle cx='6' cy='6' r='3' />
+												<path d='M13 6h3a2 2 0 0 1 2 2v7' />
+												<line x1='6' y1='9' x2='6' y2='21' />
+											</svg>
+											<span>PRs</span>
+										</a>
+									)}
+								</div>
+							</div>
 						</div>
-					)}
-
-					<div class='flex justify-end gap-3 mt-auto pt-4 border-t border-gray-100 dark:border-gray-800'>
-						{project.postLink && (
-							<a
-								class='inline-flex items-center gap-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
-								href={project.postLink}>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='16'
-									height='16'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'>
-									<path d='M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2' />
-									<path d='M18 14h-8' />
-									<path d='M15 18h-5' />
-									<path d='M10 6h8v4h-8V6Z' />
-								</svg>
-								Article
-							</a>
-						)}
-
-						{project.pullRequests && project.pullRequests.length > 0 && (
-							<a
-								class='inline-flex items-center gap-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
-								href={project.pullRequests[0]}
-								target='_blank'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='16'
-									height='16'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'>
-									<circle cx='18' cy='18' r='3' />
-									<circle cx='6' cy='6' r='3' />
-									<path d='M13 6h3a2 2 0 0 1 2 2v7' />
-									<line x1='6' y1='9' x2='6' y2='21' />
-								</svg>
-								PRs
-							</a>
-						)}
-
-						{project.demoLink && (
-							<a
-								class='inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-500 transition-colors'
-								href={project.demoLink}
-								target='_blank'
-								rel={project.demoLinkRel}>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='16'
-									height='16'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'>
-									<path d='M15 3h6v6' />
-									<path d='M10 14 21 3' />
-									<path d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6' />
-								</svg>
-								Demo
-							</a>
-						)}
 					</div>
 				</div>
-			</div>
+			</article>
 		))
 	}
 </div>
 
 <style>
-	@keyframes fadeIn {
+	@keyframes slideIn {
 		from {
 			opacity: 0;
-			transform: translateY(10px);
+			transform: translateX(-20px);
 		}
 		to {
 			opacity: 1;
-			transform: translateY(0);
+			transform: translateX(0);
 		}
 	}
 
-	.grid > div {
-		animation: fadeIn 0.5s ease-out forwards;
+	article {
+		animation: slideIn 0.4s ease-out forwards;
 		opacity: 0;
 	}
 
-	.grid > div:nth-child(1) {
+	article:nth-child(1) {
 		animation-delay: 0.1s;
 	}
-	.grid > div:nth-child(2) {
+	article:nth-child(2) {
 		animation-delay: 0.2s;
 	}
-	.grid > div:nth-child(3) {
+	article:nth-child(3) {
 		animation-delay: 0.3s;
 	}
-	.grid > div:nth-child(4) {
+	article:nth-child(4) {
 		animation-delay: 0.4s;
 	}
-	.grid > div:nth-child(5) {
+	article:nth-child(5) {
 		animation-delay: 0.5s;
 	}
-	.grid > div:nth-child(6) {
+	article:nth-child(6) {
 		animation-delay: 0.6s;
 	}
 </style>

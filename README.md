@@ -1,86 +1,43 @@
-# Muhamad Risman's Portfolio & Blog
+# Muhamad Risman — Portfolio & Writing
 
-Personal website showcasing my work, thoughts, and expertise in software engineering. Built with Astro and modern web technologies.
+Personal portfolio and engineering notes for [realrisman.github.io](https://realrisman.github.io/).
 
-[Live Site](https://realrisman.github.io/)
+## Stack
 
-## About Me
+- Astro 7 with static output
+- Tailwind CSS 4 through the first-party Vite plugin
+- Astro Content Layer for Markdown posts
+- TypeScript 6
+- Partytown for optional analytics isolation
+- GitHub Pages deployment
 
-I'm a seasoned Software Engineer with over 10 years of experience specializing in full-stack development and microservices architecture. I've worked with companies like Keller Williams Realty and Catch.com.au, building scalable applications and transforming monolithic systems.
+## Development
 
-### Technical Expertise
-
-- Frontend: React.js, TypeScript, Next.js
-- Backend: Golang, PHP (Laravel, Symfony)
-- Architecture: Microservices, Event-Driven Systems
-- DevOps: Docker, RabbitMQ, Prometheus, Grafana
-
-## 🚀 Project Structure
-
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-│   └── styles/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+```sh
+pnpm install
+pnpm dev
 ```
 
-## ✨ Features
+The local site runs at `http://localhost:4321`.
 
-- ✅ Clean, professional design
-- ✅ Dark mode support
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-optimized
-- ✅ Responsive layout
-- ✅ Blog with MDX support
-- ✅ Project portfolio
-- ✅ Technical writing section
-- ✅ RSS Feed support
-- ✅ Sitemap integration
-- ✅ Table of contents
+## Quality checks
 
-## 🧞 Development Commands
+```sh
+pnpm build
+```
 
-| Command            | Action                                      |
-| ------------------ | ------------------------------------------- |
-| `pnpm install`     | Installs dependencies                       |
-| `pnpm run dev`     | Starts local dev server at `localhost:4321` |
-| `pnpm run build`   | Build production site to `./dist/`          |
-| `pnpm run preview` | Preview build locally                       |
+The production command runs Astro's type/content checks before generating the static site in `dist/`.
 
-## 📫 Contact & Social
+## Content
 
-- 📧 Email: real.risman@gmail.com
-- 💻 GitHub: [Your GitHub Profile](https://github.com/realrisman)
-- 🔗 LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/muhamad-risman)
+Blog posts live in `src/content/blog`. Project data lives in `src/data/projects.ts`.
 
-## 🛠 Built With
+## Environment variables
 
-- [Astro](https://astro.build) - Static Site Generator
-- [React](https://reactjs.org) - UI Components
-- [Tailwind CSS](https://tailwindcss.com) - Styling
-- [MDX](https://mdxjs.com) - Content Management
+Optional integrations use:
 
-## 📝 License
-
-MIT License © [Muhamad Risman]
-
-Feel free to use this template for your own portfolio!
-
----
-
-### 💼 Available for Opportunities
-
-Currently open for:
-
-- Freelance projects
-- Technical collaborations
-- Software architecture consulting
-- Full-stack development roles
+- `GTAG_MEASUREMENT_ID`
+- `GISCUS_REPO`
+- `GISCUS_REPO_ID`
+- `GISCUS_CATEGORY`
+- `GISCUS_CATEGORY_ID`

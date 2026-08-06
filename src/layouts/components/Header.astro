@@ -73,6 +73,8 @@ const section = `/${Astro.url.pathname.split('/').filter(Boolean)[0] || ''}/`;
 </header>
 
 <script>
+	import { syncGiscusTheme as syncGiscusFrameTheme } from '../../giscusTheme';
+
 	const syncThemeButton = () => {
 		const isDark = document.documentElement.classList.contains('dark');
 		document.querySelectorAll<HTMLButtonElement>('.theme-toggle').forEach((button) => {
@@ -82,10 +84,9 @@ const section = `/${Astro.url.pathname.split('/').filter(Boolean)[0] || ''}/`;
 
 	const syncGiscusTheme = () => {
 		const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
-		if (!iframe?.contentWindow) return false;
+		if (!iframe) return false;
 
-		const theme = document.documentElement.classList.contains('dark') ? 'dark_dimmed' : 'light';
-		iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
+		syncGiscusFrameTheme(iframe, () => document.documentElement.classList.contains('dark'));
 		return true;
 	};
 

@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-
 type PicSize = 'sm' | 'md' | 'lg';
 interface Props {
 	picSize: PicSize;
@@ -18,8 +16,7 @@ const { picSize } = Astro.props;
 			{ 'w-12 h-12': picSize === 'sm' },
 			{ 'w-[70px] h-[70px]': picSize === 'md' },
 			{ 'w-[90px] h-[90px]': picSize === 'lg' }
-		]}
-	>
+		]}>
 		<img src='/profile.webp' alt='Muhamad Risman' width='100%' height='100%' />
 	</a>
 	<div>
@@ -28,8 +25,7 @@ const { picSize } = Astro.props;
 				href='https://github.com/realrisman'
 				class='block font-bold text-inherit hover:text-[var(--link-color)]'
 				target='_blank'
-				rel='noopener noreferrer'
-			>
+				rel='noopener noreferrer'>
 				Muhamad Risman
 			</a>
 		</div>

@@ -3,38 +3,75 @@ import type { CollectionEntry } from 'astro:content';
 import PostItem from './PostItem.astro';
 
 type BlogPost = CollectionEntry<'blog'>;
+interface Props {
+	posts: BlogPost[];
+}
 const { posts } = Astro.props;
 
-function groupPostsByYear(posts: BlogPost[]) {
-  const grouped = posts.reduce((acc, post) => {
-    const year = post.data.pubDate.getFullYear();
-    if (!acc[year]) {
-      acc[year] = [];
-    }
-    acc[year].push(post);
-    return acc;
-  }, {} as Record<number, BlogPost[]>);
-
-  return Object.entries(grouped)
-    .sort(([a], [b]) => Number(b) - Number(a))
-    .map(([year, posts]) => ({
-      year: Number(year),
-      posts: posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()),
-    }));
-}
-
-const groupedPosts = groupPostsByYear(posts);
-
-
+const grouped = posts.reduce((grouped: Record<number, BlogPost[]>, post: BlogPost) => {
+	const year = post.data.pubDate.getFullYear();
+	(grouped[year] ||= []).push(post);
+	return grouped;
+}, {});
+const groupedPosts: Array<{ year: string; posts: BlogPost[] }> = Object.entries(grouped)
+	.sort(([a], [b]) => Number(b) - Number(a))
+	.map(([year, yearPosts]) => ({ year, posts: yearPosts }));
 ---
 
-{groupedPosts.map(({ year, posts }) => (
-  <div class="mb-8">
-    <h2 class="text-2xl font-bold mb-4">{year}</h2>
-    <div>
-      {posts.map((post: BlogPost, i: number) => (
-        <PostItem post={post} />
-      ))}
-    </div>
-  </div>
-))}
+<div class='post-archive'>
+	{groupedPosts.length === 0 && <p class='empty-state'>No notes published yet.</p>}
+	{
+		groupedPosts.map(({ year, posts: yearPosts }) => (
+			<section class='year-group'>
+				<h2>{year}</h2>
+				<div class='year-posts'>
+					{yearPosts.map((post: BlogPost) => (
+						<PostItem post={post} />
+					))}
+				</div>
+			</section>
+		))
+	}
+</div>
+
+<style>
+	.year-group {
+		display: grid;
+		grid-template-columns: 10rem 1fr;
+		gap: 2rem;
+		padding-block: 1.5rem;
+		border-top: 1px solid var(--line);
+	}
+
+	.year-group h2 {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: 3.5rem;
+		font-weight: 400;
+	}
+
+	.year-posts {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1px;
+		background: var(--line);
+		border: 1px solid var(--line);
+	}
+
+	.empty-state {
+		padding: 3rem;
+		background: var(--surface);
+		border: 1px solid var(--line);
+		color: var(--muted);
+	}
+
+	@media (max-width: 760px) {
+		.year-group {
+			grid-template-columns: 1fr;
+		}
+
+		.year-posts {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

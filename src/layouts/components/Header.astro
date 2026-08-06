@@ -1,453 +1,262 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { Image } from 'astro:assets';
-import GithubWhite from '@src/assets/svgs/github-mark-white.svg';
-import GithubBlack from '@src/assets/svgs/github-mark.svg';
-
 const menu = [
-	{
-		link: '/about/',
-		label: 'About'
-	},
-	{
-		link: '/posts/',
-		label: 'Posts'
-	},
-	{
-		link: '/projects/',
-		label: 'Projects'
-	},
-	{
-		link: '/tags/',
-		label: 'Tags'
-	}
+	{ link: '/about/', label: 'About' },
+	{ link: '/projects/', label: 'Work' },
+	{ link: '/posts/', label: 'Writing' },
+	{ link: '/tags/', label: 'Topics' }
 ];
+
+const section = `/${Astro.url.pathname.split('/').filter(Boolean)[0] || ''}/`;
 ---
 
-<header
-	id='site-header'
-	class:list={[
-		'fixed top-0 left-0 right-0 flex items-center w-full transition-all duration-300 z-[1001] backdrop-blur-md bg-white/80 dark:bg-dark-200/80 border-b border-gray-200/50 dark:border-gray-800/50'
-	]}
->
-	<div class='container'>
-		<nav class='flex gap-4 items-center justify-between py-3'>
-			<h2 class='m-0'>
-				<a href='/' class='group flex gap-3 items-center text-xl font-black'>
-					<div class='relative'>
-						<div
-							class='absolute inset-0 rounded-full bg-gradient-to-r from-primary-400 to-purple-500 blur-[2px] opacity-70 animate-pulse group-hover:opacity-100 transition-opacity'
-						>
-						</div>
-						<img
-							src='/profile-zoomed.webp'
-							alt='Muhamad Risman'
-							class='relative rounded-full w-10 h-10 border-2 border-white dark:border-dark-100 shadow-lg object-cover group-hover:scale-105 transition-transform'
-						/>
-					</div>
-					<span
-						class='bg-gradient-to-r from-primary-600 to-purple-600 dark:from-primary-400 dark:to-purple-400 text-transparent bg-clip-text font-bold group-hover:opacity-80 transition-opacity'
-						>Risman</span
-					>
-				</a>
-			</h2>
+<header class='site-header'>
+	<div class='site-container header-inner'>
+		<a class='brand' href='/' aria-label='Muhamad Risman, home'>
+			<span class='brand-mark'>MR</span>
+			<span class='brand-name'>Muhamad Risman</span>
+		</a>
 
-			<!-- Desktop Navigation -->
-			<div class='hidden md:flex items-center space-x-1'>
-				{
-					menu.map((item) => (
-						<HeaderLink
-							class='relative px-3 py-2 rounded-md text-sm font-medium transition-all hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 group'
-							href={item.link}>
-							{item.label}
-							<span class='absolute bottom-1 left-3 right-3 h-px bg-primary-500 dark:bg-primary-400 transform scale-x-0 transition-transform group-hover:scale-x-100' />
-						</HeaderLink>
-					))
-				}
-			</div>
-
-			<div class='flex items-center gap-2'>
-				<a
-					class='p-2 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all hover:text-primary-600 dark:hover:text-primary-400 dark:hidden'
-					href='https://github.com/realrisman'
-					target='_blank'><Image src={GithubBlack} width={22} height={22} alt='Github logo' /></a
-				>
-				<a
-					class='p-2 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all hover:text-primary-600 dark:hover:text-primary-400 hidden dark:block'
-					href='https://github.com/realrisman'
-					target='_blank'><Image src={GithubWhite} width={22} height={22} alt='Github logo' /></a
-				>
-				<button
-					class='p-2 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all hover:text-primary-600 dark:hover:text-primary-400'
-					id='themeToggle'
-					aria-label='Theme mode'
-				>
-					<svg
-						class='sun'
-						xmlns='http://www.w3.org/2000/svg'
-						width='22'
-						height='22'
-						viewBox='0 0 24 24'
-						fill='none'
-						stroke='currentColor'
-						stroke-width='2'
-						stroke-linecap='round'
-						stroke-linejoin='round'
-						><circle cx='12' cy='12' r='4'></circle><path d='M12 2v2'></path><path d='M12 20v2'></path><path d='m4.93 4.93 1.41 1.41'
-						></path><path d='m17.66 17.66 1.41 1.41'></path><path d='M2 12h2'></path><path d='M20 12h2'></path><path
-							d='m6.34 17.66-1.41 1.41'></path><path d='m19.07 4.93-1.41 1.41'></path></svg
-					>
-					<svg
-						class='moon'
-						xmlns='http://www.w3.org/2000/svg'
-						width='22'
-						height='22'
-						viewBox='0 0 24 24'
-						fill='none'
-						stroke='currentColor'
-						stroke-width='2'
-						stroke-linecap='round'
-						stroke-linejoin='round'
-					>
-						<path d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z'></path></svg
-					>
-				</button>
-
-				<!-- Mobile menu button -->
-				<button
-					id='mobile-menu-button'
-					class='md:hidden p-2.5 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all hover:text-primary-600 dark:hover:text-primary-400 border border-gray-200/50 dark:border-gray-800/50'
-					aria-label='Toggle menu'
-				>
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						width='20'
-						height='20'
-						viewBox='0 0 24 24'
-						fill='none'
-						stroke='currentColor'
-						stroke-width='2'
-						stroke-linecap='round'
-						stroke-linejoin='round'
-						class='menu-icon text-gray-700 dark:text-gray-300'
-					>
-						<line x1='4' x2='20' y1='12' y2='12'></line>
-						<line x1='4' x2='20' y1='6' y2='6'></line>
-						<line x1='4' x2='20' y1='18' y2='18'></line>
-					</svg>
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						width='20'
-						height='20'
-						viewBox='0 0 24 24'
-						fill='none'
-						stroke='currentColor'
-						stroke-width='2'
-						stroke-linecap='round'
-						stroke-linejoin='round'
-						class='close-icon hidden text-gray-700 dark:text-gray-300'
-					>
-						<path d='M18 6 6 18'></path>
-						<path d='m6 6 12 12'></path>
-					</svg>
-				</button>
-			</div>
+		<nav class='desktop-nav' aria-label='Primary navigation'>
+			{
+				menu.map((item) => (
+					<a href={item.link} aria-current={section === item.link ? 'page' : undefined}>
+						{item.label}
+					</a>
+				))
+			}
 		</nav>
-	</div>
 
-	<!-- Mobile Navigation Menu -->
-	<div id='mobile-menu' class='fixed inset-0 top-0 z-[1000] bg-white dark:bg-dark-200 hidden min-h-screen'>
-		<nav class='container h-screen flex flex-col'>
-			<div class='flex items-center justify-between py-4 border-b border-gray-100 dark:border-gray-800'>
-				<a href='/' class='group flex gap-3 items-center text-xl font-black'>
-					<div class='relative'>
-						<div
-							class='absolute inset-0 rounded-full bg-gradient-to-r from-primary-400 to-purple-500 blur-[2px] opacity-70 animate-pulse group-hover:opacity-100 transition-opacity'
-						>
-						</div>
-						<img
-							src='/profile-zoomed.webp'
-							alt='Muhamad Risman'
-							class='relative rounded-full w-10 h-10 border-2 border-white dark:border-dark-100 shadow-lg object-cover group-hover:scale-105 transition-transform'
-						/>
-					</div>
-					<span
-						class='bg-gradient-to-r from-primary-600 to-purple-600 dark:from-primary-400 dark:to-purple-400 text-transparent bg-clip-text font-bold group-hover:opacity-80 transition-opacity'
-						>Risman</span
-					>
-				</a>
-				<button
-					id='mobile-menu-close'
-					class='p-2 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all hover:text-primary-600 dark:hover:text-primary-400'
-					aria-label='Close menu'
+		<div class='header-actions'>
+			<a class='desktop-contact' href='mailto:real.risman@gmail.com'>Let's talk <span aria-hidden='true'>↗</span></a>
+			<button class='theme-toggle' type='button' aria-label='Switch color theme' title='Switch color theme'>
+				<svg
+					class='sun-icon'
+					aria-hidden='true'
+					viewBox='0 0 24 24'
+					width='18'
+					height='18'
+					fill='none'
+					stroke='currentColor'
+					stroke-width='1.8'
+					><circle cx='12' cy='12' r='4'></circle><path
+						d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41'
+					></path></svg
 				>
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						width='24'
-						height='24'
-						viewBox='0 0 24 24'
-						fill='none'
-						stroke='currentColor'
-						stroke-width='2'
-						stroke-linecap='round'
-						stroke-linejoin='round'
-					>
-						<path d='M18 6 6 18'></path>
-						<path d='m6 6 12 12'></path>
-					</svg>
-				</button>
-			</div>
+				<svg
+					class='moon-icon'
+					aria-hidden='true'
+					viewBox='0 0 24 24'
+					width='18'
+					height='18'
+					fill='none'
+					stroke='currentColor'
+					stroke-width='1.8'><path d='M21 12.8A8.5 8.5 0 1 1 11.2 3 6.6 6.6 0 0 0 21 12.8Z'></path></svg
+				>
+			</button>
 
-			<div class='flex-1 overflow-y-auto py-6'>
-				<ul class='space-y-1'>
+			<details class='mobile-nav'>
+				<summary aria-label='Open navigation'>Menu</summary>
+				<nav aria-label='Mobile navigation'>
 					{
-						menu.map((item) => {
-							const isActive = Astro.url.pathname === item.link || Astro.url.pathname === '/' + item.link.split('/')[1];
-							return (
-								<li>
-									<a
-										href={item.link}
-										class:list={[
-											'group flex items-center py-2.5 px-4 text-base font-medium transition-all duration-200 rounded-lg',
-											{
-												'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30': isActive,
-												'text-gray-800 dark:text-gray-200 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400':
-													!isActive
-											}
-										]}>
-										<span class='relative'>
-											{item.label}
-											{!isActive && (
-												<span class='absolute bottom-0 left-0 right-0 h-px bg-primary-500 dark:bg-primary-400 transform scale-x-0 transition-transform group-hover:scale-x-100' />
-											)}
-										</span>
-									</a>
-								</li>
-							);
-						})
+						menu.map((item, index) => (
+							<a href={item.link} aria-current={section === item.link ? 'page' : undefined}>
+								<span>0{index + 1}</span>
+								{item.label}
+							</a>
+						))
 					}
-				</ul>
-			</div>
-
-			<div class='border-t border-gray-100 dark:border-gray-800 py-6'>
-				<div class='space-y-3'>
-					<a
-						href='mailto:real.risman@gmail.com'
-						class='group flex items-center gap-3 py-2.5 px-4 text-base font-medium text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-200 rounded-lg'
-					>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							width='18'
-							height='18'
-							viewBox='0 0 24 24'
-							fill='none'
-							stroke='currentColor'
-							stroke-width='2'
-							stroke-linecap='round'
-							stroke-linejoin='round'
-							class='transition-transform group-hover:scale-110'
-						>
-							<path d='M5 7.2A2.2 2.2 0 0 1 7.2 5h9.6A2.2 2.2 0 0 1 19 7.2v9.6a2.2 2.2 0 0 1-2.2 2.2H7.2A2.2 2.2 0 0 1 5 16.8V7.2Z'></path>
-							<path d='m5 7 7 7 7-7'></path>
-						</svg>
-						Contact Me
-					</a>
-					<a
-						href='https://github.com/realrisman'
-						target='_blank'
-						class='flex items-center gap-3 py-2.5 px-4 text-base font-medium rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all hover:text-primary-600 dark:hover:text-primary-400 text-gray-700 dark:text-gray-300'
-					>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							width='18'
-							height='18'
-							viewBox='0 0 24 24'
-							fill='none'
-							stroke='currentColor'
-							stroke-width='2'
-							stroke-linecap='round'
-							stroke-linejoin='round'
-						>
-							<path
-								d='M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4'
-							></path>
-							<path d='M9 18c-4.51 2-5-2-7-2'></path>
-						</svg>
-						GitHub
-					</a>
-					<button
-						class='flex w-full items-center gap-3 py-2.5 px-4 text-base font-medium rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all hover:text-primary-600 dark:hover:text-primary-400 text-gray-700 dark:text-gray-300'
-						id='mobileThemeToggle'
-					>
-						<svg
-							class='sun'
-							xmlns='http://www.w3.org/2000/svg'
-							width='18'
-							height='18'
-							viewBox='0 0 24 24'
-							fill='none'
-							stroke='currentColor'
-							stroke-width='2'
-							stroke-linecap='round'
-							stroke-linejoin='round'
-						>
-							<circle cx='12' cy='12' r='4'></circle>
-							<path d='M12 2v2'></path>
-							<path d='M12 20v2'></path>
-							<path d='m4.93 4.93 1.41 1.41'></path>
-							<path d='m17.66 17.66 1.41 1.41'></path>
-							<path d='M2 12h2'></path>
-							<path d='M20 12h2'></path>
-							<path d='m6.34 17.66-1.41 1.41'></path>
-							<path d='m19.07 4.93-1.41 1.41'></path>
-						</svg>
-						<svg
-							class='moon hidden'
-							xmlns='http://www.w3.org/2000/svg'
-							width='18'
-							height='18'
-							viewBox='0 0 24 24'
-							fill='none'
-							stroke='currentColor'
-							stroke-width='2'
-							stroke-linecap='round'
-							stroke-linejoin='round'
-						>
-							<path d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z'></path>
-						</svg>
-						Theme
-					</button>
-				</div>
-			</div>
-		</nav>
+					<a href='mailto:real.risman@gmail.com'><span>05</span>Contact</a>
+				</nav>
+			</details>
+		</div>
 	</div>
+</header>
 
-	<style is:global>
-		#themeToggle .moon,
-		#mobileThemeToggle .moon {
+<script>
+	const syncThemeButton = () => {
+		const isDark = document.documentElement.classList.contains('dark');
+		document.querySelectorAll<HTMLButtonElement>('.theme-toggle').forEach((button) => {
+			button.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+		});
+	};
+
+	document.querySelectorAll<HTMLButtonElement>('.theme-toggle').forEach((button) => {
+		button.addEventListener('click', () => {
+			const isDark = document.documentElement.classList.toggle('dark');
+			localStorage.setItem('theme', isDark ? 'dark' : 'light');
+			syncThemeButton();
+		});
+	});
+
+	syncThemeButton();
+</script>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		background: color-mix(in srgb, var(--background) 86%, transparent);
+		border-bottom: 1px solid var(--line);
+		backdrop-filter: blur(16px);
+	}
+
+	.header-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 4.75rem;
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.85rem;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.brand-mark {
+		display: grid;
+		width: 2.45rem;
+		height: 2.45rem;
+		place-items: center;
+		background: var(--text);
+		color: var(--background);
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: -0.06em;
+	}
+
+	.brand-name {
+		font-size: 0.92rem;
+	}
+
+	.desktop-nav {
+		display: flex;
+		gap: 2rem;
+	}
+
+	.desktop-nav a,
+	.desktop-contact {
+		position: relative;
+		color: var(--muted);
+		font-size: 0.8rem;
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.desktop-nav a:hover,
+	.desktop-nav a[aria-current='page'] {
+		color: var(--text);
+	}
+
+	.desktop-nav a[aria-current='page']::after {
+		content: '';
+		position: absolute;
+		right: 0;
+		bottom: -0.5rem;
+		left: 0;
+		height: 2px;
+		background: var(--accent);
+	}
+
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.desktop-contact {
+		padding-right: 0.75rem;
+		color: var(--text);
+	}
+
+	.theme-toggle {
+		display: grid;
+		width: 2.45rem;
+		height: 2.45rem;
+		place-items: center;
+		background: transparent;
+		border: 1px solid var(--line);
+		color: var(--text);
+		cursor: pointer;
+	}
+
+	.theme-toggle:hover {
+		background: var(--accent);
+		color: var(--accent-ink);
+	}
+
+	.moon-icon,
+	:global(.dark) .sun-icon {
+		display: none;
+	}
+
+	:global(.dark) .moon-icon {
+		display: block;
+	}
+
+	.mobile-nav {
+		display: none;
+	}
+
+	@media (max-width: 760px) {
+		.header-inner {
+			min-height: 4.25rem;
+		}
+
+		.brand-name,
+		.desktop-nav,
+		.desktop-contact {
 			display: none;
 		}
-		.dark #themeToggle .sun,
-		.dark #mobileThemeToggle .sun {
-			display: none;
-		}
-		.dark #themeToggle .moon,
-		.dark #mobileThemeToggle .moon {
+
+		.mobile-nav {
 			display: block;
 		}
 
-		/* Add smooth animation for mobile menu */
-		#mobile-menu {
-			transition: opacity 0.3s ease-in-out;
-			opacity: 0;
-			pointer-events: none;
+		.mobile-nav summary {
+			padding: 0.65rem 0.8rem;
+			border: 1px solid var(--line);
+			font-family: var(--font-mono);
+			font-size: 0.7rem;
+			list-style: none;
+			text-transform: uppercase;
+			cursor: pointer;
 		}
 
-		#mobile-menu:not(.hidden) {
-			opacity: 1;
-			pointer-events: auto;
+		.mobile-nav summary::-webkit-details-marker {
+			display: none;
 		}
 
-		/* Add hover animation for header links */
-		@keyframes linkHover {
-			0% {
-				width: 0;
-				left: 50%;
-				right: 50%;
-			}
-			100% {
-				width: 100%;
-				left: 0;
-				right: 0;
-			}
-		}
-	</style>
-
-	<script is:inline>
-		const theme = (() => {
-			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-				return 'dark';
-			}
-			if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-				return localStorage.getItem('theme');
-			}
-			return 'light';
-		})();
-
-		if (theme === 'light') {
-			document.documentElement.classList.remove('dark');
-		} else {
-			document.documentElement.classList.add('dark');
+		.mobile-nav nav {
+			position: fixed;
+			top: 4.25rem;
+			right: 0;
+			left: 0;
+			display: grid;
+			padding: 1.5rem 1rem 2rem;
+			background: var(--background);
+			border-bottom: 1px solid var(--line);
+			box-shadow: var(--shadow);
 		}
 
-		window.localStorage.setItem('theme', theme || '');
-
-		function sendMessage(message) {
-			const iframe = document.querySelector('iframe.giscus-frame');
-			if (!iframe) return;
-			iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+		.mobile-nav nav a {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			padding: 1rem 0;
+			border-bottom: 1px solid var(--line);
+			font-family: var(--font-display);
+			font-size: 2rem;
+			text-decoration: none;
 		}
 
-		const handleToggleClick = () => {
-			const element = document.documentElement;
-			element.classList.toggle('dark');
-
-			const isDark = element.classList.contains('dark');
-			if (isDark) {
-				sendMessage({
-					setConfig: {
-						theme: 'dark_dimmed'
-					}
-				});
-			} else {
-				sendMessage({
-					setConfig: {
-						theme: 'light'
-					}
-				});
-			}
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
-		};
-		document.getElementById('themeToggle')?.addEventListener('click', handleToggleClick);
-
-		// Mobile menu toggle with smooth animation
-		document.addEventListener('DOMContentLoaded', () => {
-			const mobileMenuButton = document.getElementById('mobile-menu-button');
-			const mobileMenuCloseButton = document.getElementById('mobile-menu-close');
-			const mobileMenu = document.getElementById('mobile-menu');
-			const menuIcon = document.querySelector('.menu-icon');
-			const closeIcon = document.querySelector('.close-icon');
-			const mobileThemeToggle = document.getElementById('mobileThemeToggle');
-
-			function closeMobileMenu() {
-				mobileMenu.classList.add('hidden');
-				menuIcon.classList.remove('hidden');
-				closeIcon.classList.add('hidden');
-				document.body.classList.remove('overflow-hidden');
-			}
-
-			function openMobileMenu() {
-				mobileMenu.classList.remove('hidden');
-				menuIcon.classList.add('hidden');
-				closeIcon.classList.remove('hidden');
-				document.body.classList.add('overflow-hidden');
-			}
-
-			if (mobileMenuButton && mobileMenu) {
-				mobileMenuButton.addEventListener('click', openMobileMenu);
-				mobileMenuCloseButton.addEventListener('click', closeMobileMenu);
-
-				// Close menu when clicking on a link
-				const mobileLinks = mobileMenu.querySelectorAll('a');
-				mobileLinks.forEach((link) => {
-					link.addEventListener('click', closeMobileMenu);
-				});
-			}
-
-			// Add theme toggle functionality to mobile menu
-			if (mobileThemeToggle) {
-				mobileThemeToggle.addEventListener('click', handleToggleClick);
-			}
-		});
-	</script>
-</header>
+		.mobile-nav nav a span {
+			color: var(--muted);
+			font-family: var(--font-mono);
+			font-size: 0.65rem;
+		}
+	}
+</style>

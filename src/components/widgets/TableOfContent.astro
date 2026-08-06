@@ -1,167 +1,67 @@
 ---
-const { headings, maxLevel = 3 } = Astro.props;
-const toc = buildToc(headings);
-function buildToc(headings: any) {
-	const _toc: any = [];
-	const parentHeadings = new Map();
-	(headings || []).forEach((h: any) => {
-		const heading = { ...h, subheadings: [] };
-		parentHeadings.set(heading.depth, heading);
-		// Change 2 to 1 if your markdown includes your <h1>
-		if (heading.depth === 2) {
-			_toc.push(heading);
-		} else {
-			if (maxLevel > 2) {
-				parentHeadings.get(heading.depth - 1)?.subheadings?.push(heading);
-			}
-		}
-	});
-	return _toc;
-}
+const { headings } = Astro.props;
+const visibleHeadings = headings.filter((heading: { depth: number }) => heading.depth === 2 || heading.depth === 3);
 ---
 
-<nav class='toc sticky top-4 py-3'>
-	<div class='flex items-center gap-2 mb-2 px-3'>
-		<svg
-			xmlns='http://www.w3.org/2000/svg'
-			width='16'
-			height='16'
-			viewBox='0 0 24 24'
-			fill='none'
-			stroke='currentColor'
-			stroke-width='2'
-			stroke-linecap='round'
-			stroke-linejoin='round'
-			class='text-primary-600 dark:text-primary-400'
-		>
-			<path d='M4 6h16'></path>
-			<path d='M4 12h16'></path>
-			<path d='M4 18h12'></path>
-		</svg>
-		<h3 class='font-bold text-sm text-gray-900 dark:text-gray-100'>Contents</h3>
-	</div>
-	<ul class='toc-list max-h-[calc(100vh-120px)] overflow-auto text-sm text-gray-700 dark:text-gray-300 pr-2'>
+<nav class='toc' aria-label='Table of contents'>
+	<p>On this page</p>
+	<ol>
 		{
-			toc.map((heading: any) => (
-				<li class='mb-1'>
-					<a
-						class='block font-medium py-1.5 px-3 border-l-2 border-transparent hover:border-primary-300 dark:hover:border-primary-700 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-r-lg transition-all duration-150 leading-tight'
-						href={'#' + heading.slug}>
+			visibleHeadings.map((heading: { depth: number; slug: string; text: string }, index: number) => (
+				<li class:list={{ nested: heading.depth === 3 }}>
+					<a href={`#${heading.slug}`}>
+						<span>{String(index + 1).padStart(2, '0')}</span>
 						{heading.text}
 					</a>
-					{heading.subheadings?.length > 0 && (
-						<ul class='mt-0.5 ml-2'>
-							{heading.subheadings.map((subheading: any) => (
-								<li class='mb-0.5'>
-									<a
-										class='block py-1 pl-6 pr-3 border-l-2 border-transparent hover:border-primary-300 dark:hover:border-primary-700 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-r-lg transition-all duration-150 leading-tight text-gray-600 dark:text-gray-400 text-[0.9rem]'
-										href={'#' + subheading.slug}>
-										{subheading.text}
-									</a>
-								</li>
-							))}
-						</ul>
-					)}
 				</li>
 			))
 		}
-	</ul>
+	</ol>
 </nav>
 
-<script>
-	// Function to update active TOC item based on scroll position
-	function updateTOC() {
-		// Get all headings in the document
-		const headings = Array.from(document.querySelectorAll('h2, h3, h4, h5, h6')) as HTMLHeadingElement[];
-
-		// Get all TOC links
-		const tocLinks = Array.from(document.querySelectorAll('.toc-list a')) as HTMLAnchorElement[];
-
-		if (headings.length === 0 || tocLinks.length === 0) return;
-
-		// Find the heading that is currently in view
-		let currentHeadingIndex = 0;
-		const scrollPosition = window.scrollY + 100; // Add offset to improve accuracy
-
-		for (let i = 0; i < headings.length; i++) {
-			if (headings[i].offsetTop <= scrollPosition) {
-				currentHeadingIndex = i;
-			} else {
-				break;
-			}
-		}
-
-		// Remove active class from all TOC links
-		tocLinks.forEach((link) => {
-			link.classList.remove(
-				'bg-primary-50',
-				'dark:bg-primary-900/20',
-				'border-primary-500',
-				'dark:border-primary-500',
-				'text-primary-700',
-				'dark:text-primary-400',
-				'font-medium'
-			);
-		});
-
-		// Add active class to the current TOC link
-		const currentHeading = headings[currentHeadingIndex];
-		if (currentHeading) {
-			const currentHeadingId = currentHeading.id;
-			const correspondingLink = tocLinks.find((link) => link.getAttribute('href') === `#${currentHeadingId}`);
-
-			if (correspondingLink) {
-				correspondingLink.classList.add(
-					'bg-primary-50',
-					'dark:bg-primary-900/20',
-					'border-primary-500',
-					'dark:border-primary-500',
-					'text-primary-700',
-					'dark:text-primary-400',
-					'font-medium'
-				);
-			}
-		}
-	}
-
-	// Update TOC on page load
-	document.addEventListener('DOMContentLoaded', updateTOC);
-
-	// Update TOC on scroll
-	window.addEventListener('scroll', updateTOC);
-</script>
-
 <style>
-	.toc-list::-webkit-scrollbar {
-		width: 4px;
+	.toc > p {
+		margin: 0 0 1rem;
+		font-family: var(--font-mono);
+		font-size: 0.62rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 	}
 
-	/* Track */
-	.toc-list::-webkit-scrollbar-track {
-		background: transparent;
+	.toc ol {
+		display: grid;
+		gap: 0;
+		margin: 0;
+		padding: 0;
+		border-top: 1px solid var(--line);
+		list-style: none;
 	}
 
-	/* Handle */
-	.toc-list::-webkit-scrollbar-thumb {
-		background: #e0e0e0;
-		border-radius: 4px;
+	.toc li {
+		border-bottom: 1px solid var(--line);
 	}
 
-	.toc-list::-webkit-scrollbar-thumb:hover {
-		background: #cccccc;
+	.toc li.nested a {
+		padding-left: 1rem;
 	}
 
-	:global(.dark) .toc-list::-webkit-scrollbar-thumb {
-		background: #3e3e3e;
-		border-radius: 4px;
+	.toc a {
+		display: grid;
+		grid-template-columns: 1.8rem 1fr;
+		gap: 0.5rem;
+		padding: 0.8rem 0;
+		color: var(--muted);
+		font-size: 0.78rem;
+		line-height: 1.35;
+		text-decoration: none;
 	}
 
-	:global(.dark) .toc-list::-webkit-scrollbar-thumb:hover {
-		background: #4e4e4e;
+	.toc a:hover {
+		color: var(--text);
 	}
 
-	/* We don't need this anymore as we're handling active state with JavaScript */
-	/* :global(nav.toc a.bg-\[var\(--background-surface-color\)\]) {
-		@apply bg-primary-50 dark:bg-primary-900/20 border-primary-500 dark:border-primary-500 text-primary-700 dark:text-primary-400 font-medium;
-	} */
+	.toc a span {
+		font-family: var(--font-mono);
+		font-size: 0.55rem;
+	}
 </style>

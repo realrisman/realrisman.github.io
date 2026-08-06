@@ -1,28 +1,29 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostsByYear from '../../components/PostsByYear.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const posts = await getCollection('blog');
-const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout title='Blog Posts' description="Muhamad Risman's blog posts about software engineering, web development, and technology">
-	<div class='container'>
-		<section class='py-16 md:py-24 animate-fade-in'>
-			<div class='text-center mb-12'>
-				<h1 class='text-4xl md:text-5xl font-bold mb-4'>Blog Posts</h1>
-				<p class='text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto'>
-					Thoughts, tutorials, and insights on software engineering, web development, and technology.
-				</p>
-				<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto mt-6'></div>
+<BaseLayout
+	title='Writing — Muhamad Risman'
+	description='Notes on software architecture, product engineering, and the craft of building dependable systems.'>
+	<div class='site-container page-shell'>
+		<header class='page-header'>
+			<div>
+				<p class='eyebrow'>Writing / Field notes</p>
+				<h1 class='page-title'>Thinking in<br /><em>public.</em></h1>
 			</div>
-
-			<div class='max-w-4xl mx-auto'>
-				<div class='bg-white dark:bg-dark-100 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-8'>
-					<PostsByYear posts={sortedPosts} />
-				</div>
-			</div>
-		</section>
+			<p>Practical notes about clean code, product engineering, system design, and lessons that become clearer once written down.</p>
+		</header>
+		<PostsByYear posts={posts} />
 	</div>
 </BaseLayout>
+
+<style>
+	.page-title em {
+		color: color-mix(in srgb, var(--text) 38%, var(--accent-dark));
+		font-weight: inherit;
+	}
+</style>

@@ -1,23 +1,68 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectList from '../../components/ProjectList.astro';
-import { projects } from './projects';
+import { projects } from '../../data/projects';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title='Projects' description="Muhamad Risman's portfolio of software engineering projects">
-	<div class='container'>
-		<section class='py-16 md:py-24 animate-fade-in'>
-			<div class='text-center mb-12'>
-				<h1 class='text-4xl md:text-5xl font-bold mb-4'>Projects</h1>
-				<p class='text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto'>
-					A showcase of my software engineering work, including web applications, microservices, and open-source contributions.
-				</p>
-				<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto mt-6'></div>
+<BaseLayout title='Selected Work — Muhamad Risman' description='Selected product engineering and open-source work by Muhamad Risman.'>
+	<div class='site-container page-shell'>
+		<header class='page-header'>
+			<div>
+				<p class='eyebrow'>Work / Selected contributions</p>
+				<h1 class='page-title'>Work that moved<br />the product <em>forward.</em></h1>
 			</div>
-
-			<div class='max-w-6xl mx-auto'>
-				<ProjectList projects={projects} />
-			</div>
-		</section>
+			<p>
+				A focused collection of shipped product work, system improvements, and open-source contributions. More case studies are being
+				documented.
+			</p>
+		</header>
+		<ProjectList projects={projects} />
+		<aside class='work-note'>
+			<span>Not everything can be public.</span>
+			<p>
+				Much of my work lives inside private product teams. I’m happy to discuss relevant architecture, process, and outcomes in a
+				conversation.
+			</p>
+			<a class='button-secondary' href='mailto:real.risman@gmail.com'>Ask about relevant experience</a>
+		</aside>
 	</div>
 </BaseLayout>
+
+<style>
+	.page-title em {
+		font-weight: inherit;
+		text-decoration: underline;
+		text-decoration-color: var(--accent);
+		text-decoration-thickness: 0.15em;
+		text-underline-offset: 0.02em;
+	}
+
+	.work-note {
+		display: grid;
+		grid-template-columns: 0.7fr 1.3fr auto;
+		gap: 2rem;
+		align-items: center;
+		margin-top: 2rem;
+		padding: 2rem;
+		background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+		border: 1px solid var(--line);
+	}
+
+	.work-note > span {
+		font-family: var(--font-display);
+		font-size: 1.8rem;
+		line-height: 1;
+	}
+
+	.work-note p {
+		margin: 0;
+		color: var(--muted);
+		line-height: 1.6;
+	}
+
+	@media (max-width: 800px) {
+		.work-note {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

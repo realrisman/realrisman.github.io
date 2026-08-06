@@ -1,267 +1,256 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const capabilities = [
+	['Frontend', 'React, TypeScript, Next.js, accessible interfaces, design systems'],
+	['Backend', 'Go, PHP, Laravel, Symfony, APIs, event-driven architecture'],
+	['Systems', 'Microservices, Docker, RabbitMQ, observability, performance'],
+	['Leadership', 'Architecture, technical direction, mentoring, pragmatic delivery']
+];
 ---
 
-<BaseLayout title='About Me' description="About Muhamad Risman's professional background and core competencies">
-	<div class='container'>
-		<section class='py-16 md:py-24 animate-fade-in'>
-			<div class='text-center mb-12'>
-				<h1 class='text-4xl md:text-5xl font-bold mb-4'>About Me</h1>
-				<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto'></div>
+<BaseLayout title='About — Muhamad Risman' description="Muhamad Risman's background, approach, and software engineering expertise.">
+	<div class='site-container page-shell'>
+		<header class='page-header'>
+			<div>
+				<p class='eyebrow'>About / Approach</p>
+				<h1 class='page-title'>Engineer by craft.<br /><em>Partner</em> by nature.</h1>
 			</div>
+			<p>I care about the whole outcome: not only whether software works, but whether people can understand, operate, and evolve it.</p>
+		</header>
 
-			<div class='max-w-4xl mx-auto'>
-				<div class='bg-white dark:bg-dark-100 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-8 mb-12'>
-					<div class='space-y-6'>
-						<!-- Main Introduction -->
-						<div class='space-y-4'>
-							<p class='text-lg text-gray-700 dark:text-gray-300 leading-relaxed'>
-								I'm a seasoned Software Engineer with over 10 years of experience, specializing in full-stack development and microservices
-								architecture. Most recently, I served as a Senior Software Engineer at Anekonnect Incorporated, where I led complex projects
-								involving ReactJS, TypeScript, and Golang.
-							</p>
-						</div>
+		<section class='about-intro'>
+			<figure class='about-photo'>
+				<img src='/profile.webp' alt='Portrait of Muhamad Risman' width='1536' height='2048' />
+				<figcaption><span>Based in Indonesia</span><span>Working globally</span></figcaption>
+			</figure>
 
-						<!-- Experience Description -->
-						<div class='space-y-4'>
-							<p class='text-gray-700 dark:text-gray-300 leading-relaxed'>
-								Throughout my career, I've demonstrated expertise in transforming monolithic systems into scalable microservices
-								architectures, having worked with industry leaders like Keller Williams Realty and Catch.com.au. My technical toolkit
-								includes modern frameworks and technologies such as React.js, Next.js, TypeScript, Golang, and various PHP frameworks
-								including Laravel and Symfony.
-							</p>
-
-							<p class='text-gray-700 dark:text-gray-300 leading-relaxed'>
-								I have a proven track record of leading technical initiatives, from implementing event-driven architectures with RabbitMQ to
-								establishing monitoring systems using Prometheus and Grafana. As a former CTO at Pixel House Studio, I've also developed
-								strong leadership skills in steering teams and architectural decisions.
-							</p>
-
-							<p class='text-gray-700 dark:text-gray-300 leading-relaxed'>
-								My approach combines technical excellence with practical business solutions, focusing on scalability, clean code, and
-								optimal performance. I'm particularly passionate about creating robust, maintainable applications that deliver exceptional
-								user experiences.
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<!-- Core Competencies -->
-				<div class='grid grid-cols-1 md:grid-cols-2 gap-8 mb-12'>
-					<div class='bg-white dark:bg-dark-100 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-8 h-full'>
-						<div class='flex items-center gap-3 mb-4'>
-							<div class='p-2 rounded-lg bg-primary-100 dark:bg-primary-900/30'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='24'
-									height='24'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									class='text-primary-600 dark:text-primary-400'
-									><path d='M12 20h9'></path><path d='M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z'></path></svg
-								>
-							</div>
-							<h2 class='text-xl font-bold text-gray-800 dark:text-gray-100'>Core Competencies</h2>
-						</div>
-						<ul class='space-y-3 text-gray-700 dark:text-gray-300'>
-							<li class='flex items-start gap-2'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='20'
-									height='20'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									class='text-primary-600 dark:text-primary-400 mt-1'><polyline points='20 6 9 17 4 12'></polyline></svg
-								>
-								<span>Full-stack Development (React.js, TypeScript, Golang, PHP)</span>
-							</li>
-							<li class='flex items-start gap-2'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='20'
-									height='20'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									class='text-primary-600 dark:text-primary-400 mt-1'><polyline points='20 6 9 17 4 12'></polyline></svg
-								>
-								<span>Microservices Architecture</span>
-							</li>
-							<li class='flex items-start gap-2'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='20'
-									height='20'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									class='text-primary-600 dark:text-primary-400 mt-1'><polyline points='20 6 9 17 4 12'></polyline></svg
-								>
-								<span>Cloud Technologies</span>
-							</li>
-							<li class='flex items-start gap-2'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='20'
-									height='20'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									class='text-primary-600 dark:text-primary-400 mt-1'><polyline points='20 6 9 17 4 12'></polyline></svg
-								>
-								<span>System Design & Architecture</span>
-							</li>
-							<li class='flex items-start gap-2'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='20'
-									height='20'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									class='text-primary-600 dark:text-primary-400 mt-1'><polyline points='20 6 9 17 4 12'></polyline></svg
-								>
-								<span>Team Leadership</span>
-							</li>
-							<li class='flex items-start gap-2'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='20'
-									height='20'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									class='text-primary-600 dark:text-primary-400 mt-1'><polyline points='20 6 9 17 4 12'></polyline></svg
-								>
-								<span>Performance Optimization</span>
-							</li>
-						</ul>
-					</div>
-
-					<!-- Technical Skills -->
-					<div class='bg-white dark:bg-dark-100 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-8 h-full'>
-						<div class='flex items-center gap-3 mb-4'>
-							<div class='p-2 rounded-lg bg-primary-100 dark:bg-primary-900/30'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='24'
-									height='24'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									class='text-primary-600 dark:text-primary-400'
-									><path d='M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1'></path><path
-										d='M16 3h1a2 2 0 0 1 2 2v5c0 1.1.9 2 2 2a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1'></path></svg
-								>
-							</div>
-							<h2 class='text-xl font-bold text-gray-800 dark:text-gray-100'>Technical Skills</h2>
-						</div>
-						<div class='flex flex-wrap gap-2'>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>React.js</span
-							>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>TypeScript</span
-							>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>Golang</span
-							>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>Next.js</span
-							>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>PHP</span
-							>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>Laravel</span
-							>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>Symfony</span
-							>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>RabbitMQ</span
-							>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>Microservices</span
-							>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>RESTful APIs</span
-							>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>Git</span
-							>
-							<span
-								class='px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium'
-								>Docker</span
-							>
-						</div>
-					</div>
-				</div>
-
-				<!-- Closing Statement -->
-				<div class='bg-gradient-to-r from-primary-500/10 to-purple-500/10 rounded-2xl p-8 text-center'>
-					<p class='text-lg text-gray-700 dark:text-gray-300 leading-relaxed'>
-						I thrive in both remote and on-site environments and have successfully collaborated with teams across multiple continents, from
-						the United States to Indonesia.
-					</p>
-					<div class='mt-6'>
-						<a
-							href='mailto:real.risman@gmail.com'
-							class='inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors'
-						>
-							Contact Me
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								width='18'
-								height='18'
-								viewBox='0 0 24 24'
-								fill='none'
-								stroke='currentColor'
-								stroke-width='2'
-								stroke-linecap='round'
-								stroke-linejoin='round'><path d='M5 12h14'></path><path d='m12 5 7 7-7 7'></path></svg
-							>
-						</a>
-					</div>
-				</div>
+			<div class='about-copy'>
+				<p class='lead'>
+					For more than a decade, I’ve helped teams turn ambitious ideas and complicated legacy systems into software they can rely on.
+				</p>
+				<p>
+					My work spans product interfaces, backend services, and the architecture between them. I’ve contributed to platforms for companies
+					including Keller Williams Realty and Catch.com.au, led complex React, TypeScript, Go, and PHP initiatives, and help teams move
+					from monoliths toward clearer service boundaries.
+				</p>
+				<p>
+					The through-line is simple: understand the real problem, choose technology deliberately, and leave the system easier to work with
+					than I found it. Experience as a former CTO also taught me that strong engineering decisions are communication decisions.
+				</p>
+				<blockquote>“Clarity is a feature. Reliability is a form of respect.”</blockquote>
 			</div>
 		</section>
 	</div>
+
+	<section class='section-block'>
+		<div class='site-container'>
+			<div class='section-heading-row'>
+				<div>
+					<p class='eyebrow'>Capabilities</p>
+					<h2 class='section-title'>Broad enough to connect.<br />Deep enough to deliver.</h2>
+				</div>
+			</div>
+			<div class='capability-list'>
+				{
+					capabilities.map(([title, description], index) => (
+						<div class='capability-row'>
+							<span>0{index + 1}</span>
+							<h3>{title}</h3>
+							<p>{description}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class='section-block site-container'>
+		<div class='principles-grid'>
+			<div>
+				<p class='eyebrow'>Working principles</p>
+				<h2 class='section-title'>How I show up.</h2>
+			</div>
+			<div class='principles'>
+				<article>
+					<h3>01. Start with context</h3><p>
+						The best technical answer depends on the product, team, constraints, and future we are actually building for.
+					</p>
+				</article>
+				<article>
+					<h3>02. Make trade-offs visible</h3><p>
+						Good decisions get stronger when assumptions, risks, and alternatives are clear to everyone involved.
+					</p>
+				</article>
+				<article>
+					<h3>03. Prefer durable simplicity</h3><p>
+						I reduce accidental complexity and invest in foundations that make the next change easier.
+					</p>
+				</article>
+				<article>
+					<h3>04. Ship, learn, improve</h3><p>
+						Quality and momentum belong together: release thoughtfully, observe real behavior, and refine with evidence.
+					</p>
+				</article>
+			</div>
+		</div>
+	</section>
 </BaseLayout>
+
+<style>
+	.page-title em {
+		color: color-mix(in srgb, var(--text) 45%, var(--accent-dark));
+		font-weight: inherit;
+	}
+
+	.about-intro {
+		display: grid;
+		grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+		gap: clamp(2.5rem, 7vw, 7rem);
+		align-items: start;
+	}
+
+	.about-photo {
+		position: sticky;
+		top: 7rem;
+		margin: 0;
+		background: var(--surface);
+		border: 1px solid var(--line);
+	}
+
+	.about-photo img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		object-position: center 38%;
+		filter: grayscale(0.35) contrast(1.04);
+	}
+
+	.about-photo figcaption {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.8rem 1rem;
+		color: var(--muted);
+		font-family: var(--font-mono);
+		font-size: 0.56rem;
+		text-transform: uppercase;
+	}
+
+	.about-copy {
+		max-width: 45rem;
+		padding-top: 1rem;
+	}
+
+	.about-copy p {
+		margin: 0 0 1.5rem;
+		color: var(--muted);
+		font-size: 1.05rem;
+		line-height: 1.8;
+	}
+
+	.about-copy .lead {
+		margin-bottom: 2.5rem;
+		color: var(--text);
+		font-family: var(--font-display);
+		font-size: clamp(2.4rem, 4.5vw, 4rem);
+		letter-spacing: -0.025em;
+		line-height: 1.04;
+	}
+
+	.about-copy blockquote {
+		margin: 3rem 0 0;
+		padding: 1.5rem 0 1.5rem 2rem;
+		border-left: 0.7rem solid var(--accent);
+		font-family: var(--font-display);
+		font-size: clamp(1.8rem, 3vw, 2.5rem);
+		font-style: italic;
+		line-height: 1.1;
+	}
+
+	.capability-list {
+		border-top: 1px solid var(--line);
+	}
+
+	.capability-row {
+		display: grid;
+		grid-template-columns: 4rem minmax(9rem, 0.55fr) 1fr;
+		gap: 1.5rem;
+		align-items: center;
+		padding: 1.75rem 0;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.capability-row > span {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+	}
+
+	.capability-row h3 {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 4vw, 3.5rem);
+		font-weight: 400;
+	}
+
+	.capability-row p {
+		margin: 0;
+		color: var(--muted);
+		line-height: 1.6;
+	}
+
+	.principles-grid {
+		display: grid;
+		grid-template-columns: 0.72fr 1.28fr;
+		gap: clamp(3rem, 8vw, 8rem);
+	}
+
+	.principles {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1px;
+		background: var(--line);
+		border: 1px solid var(--line);
+	}
+
+	.principles article {
+		min-height: 14rem;
+		padding: 1.5rem;
+		background: var(--surface);
+	}
+
+	.principles h3 {
+		margin: 0 0 3rem;
+		font-size: 0.82rem;
+	}
+
+	.principles p {
+		margin: 0;
+		color: var(--muted);
+		line-height: 1.65;
+	}
+
+	@media (max-width: 760px) {
+		.about-intro,
+		.principles-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.about-photo {
+			position: static;
+		}
+
+		.capability-row {
+			grid-template-columns: 2rem 1fr;
+		}
+
+		.capability-row p {
+			grid-column: 2;
+		}
+
+		.principles {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

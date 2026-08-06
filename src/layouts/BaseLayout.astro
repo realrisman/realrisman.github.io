@@ -6,6 +6,14 @@ import Header from './components/Header.astro';
 
 const { GTAG_MEASUREMENT_ID } = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), '');
 const { title, description, image } = Astro.props;
+const gtagInitializer = GTAG_MEASUREMENT_ID
+	? `window.dataLayer = window.dataLayer || [];
+function gtag() {
+	dataLayer.push(arguments);
+}
+gtag('js', new Date());
+gtag('config', ${JSON.stringify(GTAG_MEASUREMENT_ID)});`
+	: '';
 ---
 
 <!doctype html>
@@ -24,10 +32,7 @@ const { title, description, image } = Astro.props;
 			GTAG_MEASUREMENT_ID && (
 				<>
 					<script is:inline type='text/partytown' async src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_MEASUREMENT_ID}`} />
-					<script is:inline type='text/partytown' define:vars={{ GTAG_MEASUREMENT_ID }}>
-						window.dataLayer = window.dataLayer || []; function gtag() {'{'} dataLayer.push(arguments); {'}'}
-						gtag('js', new Date()); gtag('config', GTAG_MEASUREMENT_ID);
-					</script>
+					<script is:inline type='text/partytown' set:html={gtagInitializer} />
 				</>
 			)
 		}

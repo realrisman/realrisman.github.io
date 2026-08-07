@@ -1,259 +1,361 @@
 ---
-import { SITE_TITLE, SITE_TAGLINE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
+import { projects } from '../data/projects';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import type { CollectionEntry } from 'astro:content';
-import Prose from '../components/Prose.astro';
-import { projects } from './projects/projects';
-import ProjectList from '../components/ProjectList.astro';
 import PostItem from '../components/PostItem.astro';
+import ProjectList from '../components/ProjectList.astro';
+import { SITE_DESCRIPTION, SITE_TAGLINE, SITE_TITLE } from '../consts';
 
-type BlogPost = CollectionEntry<'blog'>;
-
-const top6Projects = projects.slice(0, 6);
-const posts = (await getCollection('blog'))
-	.sort((a: BlogPost, b: BlogPost) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 5);
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
 ---
 
-<BaseLayout title={SITE_TITLE + ' - ' + SITE_TAGLINE} description={SITE_DESCRIPTION}>
-	<div class='container'>
-		<!-- Hero Section -->
-		<section class='min-h-[80vh] flex flex-col justify-center py-16 md:py-24'>
-			<div class='grid grid-cols-1 md:grid-cols-12 gap-12 items-center'>
-				<div class='md:col-span-7 space-y-6'>
-					<div
-						class='inline-block px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm font-medium mb-2'
-					>
-						Full Stack Software Engineer
-					</div>
-					<h1 class='text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
-						Hi, I'm <span
-							class='bg-gradient-to-r from-primary-600 to-purple-600 dark:from-primary-400 dark:to-purple-400 text-transparent bg-clip-text'
-							>Muhamad Risman</span
-						>
-						<span class='inline-block animate-float'>
-							<img
-								src='https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif'
-								width='40'
-								height='40'
-								alt='waving hand'
-								class='inline-block'
-								loading='lazy'
-							/>
-						</span>
-					</h1>
-					<p class='text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl'>
-						A seasoned developer with over 10 years of experience crafting robust web applications and scalable systems.
-					</p>
+<BaseLayout title={`${SITE_TITLE} — ${SITE_TAGLINE}`} description={SITE_DESCRIPTION}>
+	<section class='hero site-container'>
+		<div class='hero-copy'>
+			<p class='eyebrow'>Senior software engineer · Indonesia</p>
+			<h1 class='display-title'>Building software that stays <em>useful.</em></h1>
+			<p class='hero-intro'>
+				I’m Muhamad Risman, a product-minded engineer with 10+ years of experience turning complex systems into reliable, maintainable
+				products.
+			</p>
+			<div class='hero-actions'>
+				<a class='button-primary' href='/projects/'>Explore selected work <span aria-hidden='true'>↗</span></a>
+				<a class='button-secondary' href='mailto:real.risman@gmail.com'>Start a conversation</a>
+			</div>
+		</div>
 
-					<div class='flex flex-wrap gap-3 pt-2'>
-						<a
-							href='/projects'
-							class='inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-medium transition-colors'
-						>
-							View My Work
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								width='18'
-								height='18'
-								viewBox='0 0 24 24'
-								fill='none'
-								stroke='currentColor'
-								stroke-width='2'
-								stroke-linecap='round'
-								stroke-linejoin='round'><path d='M5 12h14'></path><path d='m12 5 7 7-7 7'></path></svg
-							>
-						</a>
-						<a
-							href='/about'
-							class='inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-dark-100 dark:hover:bg-dark-100/80 text-gray-800 dark:text-gray-200 font-medium transition-colors'
-						>
-							About Me
-						</a>
-					</div>
+		<div class='portrait-wrap'>
+			<div class='portrait-label'>
+				<span>01 / PROFILE</span>
+				<span>Available for select projects</span>
+			</div>
+			<img src='/profile.webp' alt='Muhamad Risman standing in a modern concrete interior' width='1536' height='2048' loading='eager' />
+			<div class='portrait-stamp' aria-hidden='true'>10+<small>YEARS</small></div>
+		</div>
 
-					<div class='pt-6'>
-						<div class='flex flex-wrap gap-4 items-center'>
-							<div class='text-gray-500 dark:text-gray-400 font-medium'>Tech Stack:</div>
-							<div class='flex flex-wrap gap-3'>
-								<span class='px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-100 text-gray-800 dark:text-gray-200 text-sm'>React</span>
-								<span class='px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-100 text-gray-800 dark:text-gray-200 text-sm'>TypeScript</span>
-								<span class='px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-100 text-gray-800 dark:text-gray-200 text-sm'>Next.js</span>
-								<span class='px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-100 text-gray-800 dark:text-gray-200 text-sm'>Golang</span>
-								<span class='px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-100 text-gray-800 dark:text-gray-200 text-sm'>PHP</span>
-							</div>
-						</div>
-					</div>
+		<div class='hero-meta' aria-label='Professional highlights'>
+			<div><strong>10+</strong><span>Years shipping<br />production software</span></div>
+			<div><strong>03</strong><span>Continents of<br />team collaboration</span></div>
+			<div><strong>∞</strong><span>Curiosity for<br />hard problems</span></div>
+		</div>
+	</section>
+
+	<section class='section-block'>
+		<div class='site-container'>
+			<div class='section-heading-row'>
+				<div>
+					<p class='eyebrow'>How I contribute</p>
+					<h2 class='section-title'>From product idea<br />to dependable system.</h2>
 				</div>
-
-				<div class='md:col-span-5 flex justify-center md:justify-end'>
-					<div class='relative'>
-						<div class='absolute inset-0 rounded-3xl bg-gradient-to-r from-primary-400 to-purple-500 blur-xl opacity-20 animate-pulse'>
-						</div>
-						<div class='relative'>
-							<img
-								src='/profile.webp'
-								alt='Muhamad Risman'
-								width={400}
-								loading='eager'
-								class='rounded-3xl rotate-3 shadow-xl border-4 border-white dark:border-dark-100 z-10'
-							/>
-							<div class='absolute -bottom-4 -right-4 bg-white dark:bg-dark-100 rounded-full p-3 shadow-lg'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									width='24'
-									height='24'
-									viewBox='0 0 24 24'
-									fill='none'
-									stroke='currentColor'
-									stroke-width='2'
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									class='text-primary-600 dark:text-primary-400'
-									><path
-										d='m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z'
-									></path></svg
-								>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- About Section -->
-		<section class='py-16 md:py-24'>
-			<div class='max-w-3xl mx-auto'>
-				<div class='text-center mb-12'>
-					<h2 class='text-3xl font-bold mb-4'>About Me</h2>
-					<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto'></div>
-				</div>
-
-				<Prose>
-					<div class='text-gray-600 dark:text-gray-300 space-y-4'>
-						<p>
-							I'm a seasoned Software Engineer with over 10 years of experience crafting robust web applications. Specializing in full-stack
-							development and microservices architecture, I've helped companies like Keller Williams Realty and Catch.com.au transform their
-							systems and scale their operations.
-						</p>
-
-						<p>
-							🚀 My expertise includes building scalable applications with React.js, TypeScript, and Next.js, developing robust backend
-							systems using Golang and PHP, and designing microservices architectures. I'm passionate about clean code, performance
-							optimization, and creating exceptional user experiences.
-						</p>
-
-						<div class='bg-gray-50 dark:bg-dark-100 p-6 rounded-xl mt-6 shadow-sm'>
-							<ul class='space-y-4'>
-								<li class='flex items-start'>
-									<span class='mr-3 text-xl'>💼</span>
-									<span>
-										Open for exciting opportunities! Reach me at
-										<a href='mailto:real.risman@gmail.com' class='text-primary-600 dark:text-primary-400 hover:underline font-medium'
-											>real.risman@gmail.com</a
-										>
-									</span>
-								</li>
-								<li class='flex items-start'>
-									<span class='mr-3 text-xl'>💻</span>
-									<span>Currently available for freelance projects and collaborations</span>
-								</li>
-								<li class='flex items-start'>
-									<span class='mr-3 text-xl'>💬</span>
-									<span>Feel free to reach out for technical discussions or potential projects</span>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</Prose>
-
-				<div class='mt-8 text-center'>
-					<a href='/about' class='inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:underline font-medium'>
-						Learn more about me
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							width='18'
-							height='18'
-							viewBox='0 0 24 24'
-							fill='none'
-							stroke='currentColor'
-							stroke-width='2'
-							stroke-linecap='round'
-							stroke-linejoin='round'><path d='M5 12h14'></path><path d='m12 5 7 7-7 7'></path></svg
-						>
-					</a>
-				</div>
-			</div>
-		</section>
-
-		<!-- Projects Section -->
-		<section class='py-16 md:py-24'>
-			<div class='text-center mb-12'>
-				<h2 class='text-3xl font-bold mb-4'>Featured Projects</h2>
-				<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto'></div>
-				<p class='text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto'>
-					Check out some of my recent work and open-source contributions.
-				</p>
+				<p>I work across the stack, but the real job is connecting technology, people, and business context into one coherent product.</p>
 			</div>
 
-			<ProjectList projects={top6Projects} />
-
-			<div class='mt-10 text-center'>
-				<a
-					href='/projects'
-					class='inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-dark-100 dark:hover:bg-dark-100/80 text-gray-800 dark:text-gray-200 font-medium transition-colors'
-				>
-					View All Projects
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						width='18'
-						height='18'
-						viewBox='0 0 24 24'
-						fill='none'
-						stroke='currentColor'
-						stroke-width='2'
-						stroke-linecap='round'
-						stroke-linejoin='round'><path d='M5 12h14'></path><path d='m12 5 7 7-7 7'></path></svg
-					>
-				</a>
+			<div class='expertise-grid'>
+				<article>
+					<span>01</span>
+					<h3>Product engineering</h3>
+					<p>Thoughtful web experiences built with React, TypeScript, Next.js, and a close eye on performance.</p>
+					<ul><li>Frontend architecture</li><li>Design systems</li><li>Performance</li></ul>
+				</article>
+				<article>
+					<span>02</span>
+					<h3>Backend systems</h3>
+					<p>Robust services in Go and PHP, designed for clean boundaries, observability, and sustainable scale.</p>
+					<ul><li>APIs & microservices</li><li>Event-driven systems</li><li>Cloud infrastructure</li></ul>
+				</article>
+				<article>
+					<span>03</span>
+					<h3>Technical leadership</h3>
+					<p>Clear decisions, pragmatic standards, and calm collaboration from early discovery through delivery.</p>
+					<ul><li>System design</li><li>Team enablement</li><li>Delivery strategy</li></ul>
+				</article>
 			</div>
-		</section>
+		</div>
+	</section>
 
-		<!-- Blog Section -->
-		<section class='py-16 md:py-24'>
-			<div class='text-center mb-12'>
-				<h2 class='text-3xl font-bold mb-4'>Latest Posts</h2>
-				<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto'></div>
-				<p class='text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto'>
-					Thoughts, tutorials, and insights about software development and technology.
-				</p>
+	<section class='section-block site-container'>
+		<div class='section-heading-row'>
+			<div>
+				<p class='eyebrow'>Selected work</p>
+				<h2 class='section-title'>Proof over promises.</h2>
 			</div>
+			<a class='text-link' href='/projects/'>View all work <span aria-hidden='true'>→</span></a>
+		</div>
+		<ProjectList projects={projects.slice(0, 1)} />
+	</section>
 
-			<div class='max-w-3xl mx-auto'>
-				{posts.length === 0 && <p class='text-center text-gray-500 dark:text-gray-400'>No posts yet. Check back soon!</p>}
-				{posts.map((post: BlogPost) => <PostItem post={post} />)}
+	<section class='section-block site-container'>
+		<div class='section-heading-row'>
+			<div>
+				<p class='eyebrow'>Notes from the workbench</p>
+				<h2 class='section-title'>Ideas worth<br />writing down.</h2>
 			</div>
-
-			<div class='mt-10 text-center'>
-				<a
-					href='/posts'
-					class='inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-dark-100 dark:hover:bg-dark-100/80 text-gray-800 dark:text-gray-200 font-medium transition-colors'
-				>
-					View All Posts
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						width='18'
-						height='18'
-						viewBox='0 0 24 24'
-						fill='none'
-						stroke='currentColor'
-						stroke-width='2'
-						stroke-linecap='round'
-						stroke-linejoin='round'><path d='M5 12h14'></path><path d='m12 5 7 7-7 7'></path></svg
-					>
-				</a>
-			</div>
-		</section>
-	</div>
+			<a class='text-link' href='/posts/'>Browse the archive <span aria-hidden='true'>→</span></a>
+		</div>
+		<div class='post-grid'>
+			{posts.map((post) => <PostItem post={post} />)}
+		</div>
+	</section>
 </BaseLayout>
+
+<style>
+	.hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.72fr);
+		grid-template-rows: auto auto;
+		gap: 2rem clamp(2rem, 6vw, 6rem);
+		align-items: end;
+		min-height: calc(100svh - 4.75rem);
+		padding-block: clamp(3.5rem, 7vw, 6rem) 2rem;
+	}
+
+	.hero-copy {
+		padding-bottom: clamp(1rem, 4vw, 4rem);
+	}
+
+	.display-title em {
+		position: relative;
+		font-weight: inherit;
+		white-space: nowrap;
+	}
+
+	.display-title em::after {
+		content: '';
+		position: absolute;
+		right: -0.04em;
+		bottom: 0.06em;
+		left: -0.02em;
+		z-index: -1;
+		height: 0.2em;
+		background: var(--accent);
+		transform: rotate(-1deg);
+	}
+
+	.hero-intro {
+		max-width: 39rem;
+		margin: clamp(2rem, 4vw, 3.5rem) 0 0;
+		color: var(--muted);
+		font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+		line-height: 1.65;
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.8rem;
+		margin-top: 2rem;
+	}
+
+	.portrait-wrap {
+		position: relative;
+		align-self: stretch;
+		min-height: 34rem;
+		background: var(--surface);
+		border: 1px solid var(--line);
+		overflow: hidden;
+	}
+
+	.portrait-wrap::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		box-shadow: inset 0 0 0 1px color-mix(in srgb, white 12%, transparent);
+		pointer-events: none;
+	}
+
+	.portrait-wrap img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 40%;
+		filter: saturate(0.72) contrast(1.04);
+	}
+
+	.portrait-label {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		z-index: 2;
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.8rem 1rem;
+		background: rgba(16, 17, 15, 0.78);
+		color: #f4f1e7;
+		font-family: var(--font-mono);
+		font-size: 0.58rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		backdrop-filter: blur(8px);
+	}
+
+	.portrait-stamp {
+		position: absolute;
+		right: -1px;
+		bottom: -1px;
+		display: grid;
+		width: 7rem;
+		height: 7rem;
+		place-content: center;
+		background: var(--accent);
+		color: var(--accent-ink);
+		font-family: var(--font-display);
+		font-size: 2.8rem;
+		line-height: 0.75;
+		text-align: center;
+	}
+
+	.portrait-stamp small {
+		margin-top: 0.55rem;
+		font-family: var(--font-mono);
+		font-size: 0.48rem;
+		letter-spacing: 0.14em;
+	}
+
+	.hero-meta {
+		grid-column: 1 / -1;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		border-top: 1px solid var(--line);
+		border-bottom: 1px solid var(--line);
+	}
+
+	.hero-meta > div {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1.25rem clamp(0.5rem, 2vw, 1.5rem);
+	}
+
+	.hero-meta > div + div {
+		border-left: 1px solid var(--line);
+	}
+
+	.hero-meta strong {
+		font-family: var(--font-display);
+		font-size: 2.5rem;
+		font-weight: 400;
+		line-height: 1;
+	}
+
+	.hero-meta span {
+		color: var(--muted);
+		font-family: var(--font-mono);
+		font-size: 0.62rem;
+		line-height: 1.5;
+		text-transform: uppercase;
+	}
+
+	.expertise-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		border-top: 1px solid var(--line);
+		border-left: 1px solid var(--line);
+	}
+
+	.expertise-grid article {
+		min-height: 25rem;
+		padding: 1.5rem;
+		background: var(--surface);
+		border-right: 1px solid var(--line);
+		border-bottom: 1px solid var(--line);
+	}
+
+	.expertise-grid article > span {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+	}
+
+	.expertise-grid h3 {
+		max-width: 8ch;
+		margin: 5rem 0 1.25rem;
+		font-family: var(--font-display);
+		font-size: 2.35rem;
+		font-weight: 400;
+		line-height: 0.95;
+	}
+
+	.expertise-grid p {
+		color: var(--muted);
+		line-height: 1.65;
+	}
+
+	.expertise-grid ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		margin: 2rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.expertise-grid li {
+		padding: 0.35rem 0.55rem;
+		background: color-mix(in srgb, var(--accent) 18%, transparent);
+		font-family: var(--font-mono);
+		font-size: 0.58rem;
+		text-transform: uppercase;
+	}
+
+	.post-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1px;
+		background: var(--line);
+		border: 1px solid var(--line);
+	}
+
+	@media (max-width: 900px) {
+		.hero {
+			grid-template-columns: 1fr 0.7fr;
+		}
+
+		.expertise-grid,
+		.post-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.expertise-grid article {
+			min-height: auto;
+		}
+
+		.expertise-grid h3 {
+			margin-top: 3rem;
+		}
+	}
+
+	@media (max-width: 680px) {
+		.hero {
+			display: flex;
+			flex-direction: column;
+			min-height: auto;
+		}
+
+		.hero-copy {
+			padding-bottom: 1rem;
+		}
+
+		.portrait-wrap {
+			width: 100%;
+			min-height: 31rem;
+		}
+
+		.hero-meta {
+			width: 100%;
+		}
+
+		.hero-meta > div {
+			display: block;
+		}
+
+		.hero-meta strong,
+		.hero-meta span {
+			display: block;
+		}
+
+		.hero-meta span {
+			margin-top: 0.5rem;
+		}
+	}
+</style>

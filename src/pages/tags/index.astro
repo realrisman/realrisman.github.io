@@ -1,79 +1,92 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { slugify, unslugify } from '../../utils';
-
-type BlogPost = CollectionEntry<'blog'>;
-
-function groupTagsByFirstLetter(tags: string[]) {
-	return tags.reduce(
-		(acc, tag) => {
-			const firstLetter = tag.charAt(0).toUpperCase();
-			if (!acc[firstLetter]) {
-				acc[firstLetter] = [];
-			}
-			acc[firstLetter].push(tag);
-			return acc;
-		},
-		{} as Record<string, string[]>
-	);
-}
+import { slugify } from '../../utils';
 
 const posts = await getCollection('blog');
-const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))].sort();
-const tagWithCount = tags.map((tag) => {
-	const count = posts.filter((post) => post.data.tags?.includes(tag)).length;
-	return { tag, count };
-});
-
-const groupedTags = groupTagsByFirstLetter(tags);
-const sortedLetters = Object.keys(groupedTags).sort();
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))]
+	.map((tag) => ({ tag, count: posts.filter((post) => post.data.tags.includes(tag)).length }))
+	.sort((a, b) => a.tag.localeCompare(b.tag));
 ---
 
-<BaseLayout title='Tags' description='Browse all blog post tags'>
-	<div class='container'>
-		<section class='py-16 md:py-24 animate-fade-in'>
-			<div class='text-center mb-12'>
-				<h1 class='text-4xl md:text-5xl font-bold mb-4'>Tags</h1>
-				<p class='text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto'>Browse all topics covered in the blog</p>
-				<div class='h-1 w-20 bg-gradient-to-r from-primary-500 to-purple-500 mx-auto mt-6'></div>
+<BaseLayout title='Topics — Muhamad Risman' description='Browse software engineering topics explored by Muhamad Risman.'>
+	<div class='site-container page-shell'>
+		<header class='page-header'>
+			<div>
+				<p class='eyebrow'>Topics / Index</p>
+				<h1 class='page-title'>An index of<br /><em>curiosity.</em></h1>
 			</div>
+			<p>Browse the themes that recur in my notes—from engineering fundamentals to the practical details of building for the web.</p>
+		</header>
 
-			<div class='max-w-4xl mx-auto'>
-				<div class='bg-white dark:bg-dark-100 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-8'>
-					{
-						sortedLetters.map((letter) => (
-							<div class='mb-8 last:mb-0'>
-								<div class='flex items-center gap-3 mb-4'>
-									<div class='flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 font-bold text-lg'>
-										{letter}
-									</div>
-									<div class='h-px flex-grow bg-gray-200 dark:bg-gray-700' />
-								</div>
-
-								<div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3'>
-									{groupedTags[letter].map((tag) => {
-										const count = tagWithCount.find((t) => t.tag === tag)?.count || 0;
-										return (
-											<a
-												href={`/tags/${slugify(tag)}/`}
-												class='flex items-center justify-between p-3 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-primary-500 dark:hover:border-primary-500 bg-gray-50 dark:bg-dark-200 hover:bg-primary-50 dark:hover:bg-primary-900/10 transition-colors group'>
-												<span class='font-medium text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors'>
-													{unslugify(tag)}
-												</span>
-												<span class='px-2 py-1 text-xs font-medium rounded-full bg-gray-200 dark:bg-dark-300 text-gray-700 dark:text-gray-300 group-hover:bg-primary-200 dark:group-hover:bg-primary-900/30 group-hover:text-primary-800 dark:group-hover:text-primary-300 transition-colors'>
-													{count}
-												</span>
-											</a>
-										);
-									})}
-								</div>
-							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
+		<div class='topic-index'>
+			{
+				tags.map(({ tag, count }, index) => (
+					<a href={`/tags/${slugify(tag)}/`}>
+						<span class='topic-number'>0{index + 1}</span>
+						<strong>{tag}</strong>
+						<span>
+							{count} {count === 1 ? 'note' : 'notes'}
+						</span>
+						<span aria-hidden='true'>↗</span>
+					</a>
+				))
+			}
+		</div>
 	</div>
 </BaseLayout>
+
+<style>
+	.page-title em {
+		font-weight: inherit;
+		text-decoration: underline;
+		text-decoration-color: var(--accent);
+		text-decoration-thickness: 0.15em;
+	}
+
+	.topic-index {
+		border-top: 1px solid var(--line);
+	}
+
+	.topic-index a {
+		display: grid;
+		grid-template-columns: 4rem 1fr auto 2rem;
+		gap: 1rem;
+		align-items: center;
+		padding: 1.35rem 0;
+		border-bottom: 1px solid var(--line);
+		text-decoration: none;
+		transition:
+			padding 180ms ease,
+			background 180ms ease;
+	}
+
+	.topic-index a:hover {
+		padding-inline: 1rem;
+		background: color-mix(in srgb, var(--accent) 17%, transparent);
+	}
+
+	.topic-number,
+	.topic-index a > span:nth-child(3) {
+		color: var(--muted);
+		font-family: var(--font-mono);
+		font-size: 0.62rem;
+		text-transform: uppercase;
+	}
+
+	.topic-index strong {
+		font-family: var(--font-display);
+		font-size: clamp(1.7rem, 3vw, 2.7rem);
+		font-weight: 400;
+	}
+
+	@media (max-width: 560px) {
+		.topic-index a {
+			grid-template-columns: 2rem 1fr 1.5rem;
+		}
+
+		.topic-index a > span:nth-child(3) {
+			display: none;
+		}
+	}
+</style>
